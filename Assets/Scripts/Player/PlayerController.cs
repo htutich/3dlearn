@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Проверяем на земле ли игрок и ставим что да
         if (collision.gameObject.tag == "Floor")
         {
             _playerOnGround = true;
