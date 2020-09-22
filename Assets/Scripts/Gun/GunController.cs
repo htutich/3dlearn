@@ -1,8 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+
 
 public class GunController : MonoBehaviour
 {
+
+    #region PrivateData
 
     private float _timeBetweenShots = 0.1f;
     private float _shotCounter;
@@ -10,10 +12,30 @@ public class GunController : MonoBehaviour
     [SerializeField] private Transform _ShootPoint;
     [SerializeField] private GameObject _bullet;
 
-    private void Start()
+    #endregion
+
+
+    #region OnEnable
+
+    private void OnEnable()
     {
         PlayerController.PlayerShoot += onPlayerShoot;
     }
+
+    #endregion
+
+
+    #region OnEnable
+
+    private void OnDisable()
+    {
+        PlayerController.PlayerShoot -= onPlayerShoot;
+    }
+
+    #endregion
+
+
+    #region Update
 
     private void Update()
     {
@@ -23,6 +45,11 @@ public class GunController : MonoBehaviour
         }
     }
 
+    #endregion
+
+
+    #region onPlayerShoot
+
     public void onPlayerShoot()
     {
         if (_shotCounter <= 0.0f)
@@ -31,5 +58,7 @@ public class GunController : MonoBehaviour
             Instantiate(_bullet, _ShootPoint.position, _ShootPoint.rotation);
         }
     }
+
+    #endregion
 
 }
