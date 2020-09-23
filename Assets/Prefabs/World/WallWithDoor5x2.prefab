@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 376132700468363253}
   m_Layer: 0
-  m_Name: Wall 5x2 with door
+  m_Name: WallWithDoor5x2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 7349947538137811009, guid: 438e436a64fbffa409d7cb8247716901,
         type: 3}
       propertyPath: m_Name
-      value: Wall Can Open
+      value: Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 438e436a64fbffa409d7cb8247716901, type: 3}

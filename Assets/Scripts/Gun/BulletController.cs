@@ -3,7 +3,6 @@
 
 public class BulletController : MonoBehaviour
 {
-
     #region PrivateData
 
     private float _speed = 10f;
@@ -18,6 +17,7 @@ public class BulletController : MonoBehaviour
     private void Start()
     {
         _damageToGive = Random.Range(20, 30);
+        Destroy(gameObject, _lifeTime);
     }
 
     #endregion
@@ -28,7 +28,6 @@ public class BulletController : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-        Destroy(gameObject, _lifeTime);
     }
 
     #endregion
@@ -38,12 +37,10 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "World")
-        {
-            Destroy(gameObject);
-        }
+        var EnemyHealthManager = other.gameObject.GetComponent<EnemyHealthManager>();
+        EnemyHealthManager?.HurtEnemy(_damageToGive);
+        Destroy(gameObject);
     }
 
     #endregion
-
 }

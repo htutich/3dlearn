@@ -1,18 +1,68 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+
 
 public class EnemyHealthManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region PrivateData
+
+    private float _health = 100.0f;
+    private float _curHealth;
+    public Slider slider;
+    private AudioSource _audioSource;
+
+    #endregion
+
+
+    #region Events
+
+    public delegate void EnemyAction();
+    public static event EnemyAction onEnemyDie;
+
+    #endregion
+
+
+    #region Start
+
+    private void Start()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
+
+        _curHealth = _health;
+        slider.value = CalculateHealth();
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+
+    #region Update
+
+    private void Update()
     {
-        
+        if (_curHealth <= 0)
+        {
+            Destroy(gameObject);
+            onEnemyDie();
+        }
     }
+
+    #endregion
+
+
+    #region Methods
+
+    public void HurtEnemy(int damage)
+    {
+        _audioSource.Play();
+
+        _curHealth -= damage;
+        slider.value = CalculateHealth();
+    }
+
+    private float CalculateHealth()
+    {
+        return _curHealth / _health;
+    }
+
+    #endregion
 }
