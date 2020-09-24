@@ -7,9 +7,9 @@ public class EnemyHealthManager : MonoBehaviour
     #region PrivateData
 
     private float _health = 100.0f;
-    private float _curHealth;
-    public Slider slider;
+    private float _currentHealth;
     private AudioSource _audioSource;
+    [SerializeField] private Slider _slider;
 
     #endregion
 
@@ -22,27 +22,22 @@ public class EnemyHealthManager : MonoBehaviour
     #endregion
 
 
-    #region Start
+    #region UnityMethods
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
 
-        _curHealth = _health;
-        slider.value = CalculateHealth();
+        _currentHealth = _health;
+        _slider.value = CalculateHealth();
     }
-
-    #endregion
-
-
-    #region Update
 
     private void Update()
     {
-        if (_curHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            Destroy(gameObject);
             onEnemyDie();
+            Destroy(gameObject);
         }
     }
 
@@ -55,13 +50,13 @@ public class EnemyHealthManager : MonoBehaviour
     {
         _audioSource.Play();
 
-        _curHealth -= damage;
-        slider.value = CalculateHealth();
+        _currentHealth -= damage;
+        _slider.value = CalculateHealth();
     }
 
     private float CalculateHealth()
     {
-        return _curHealth / _health;
+        return _currentHealth / _health;
     }
 
     #endregion

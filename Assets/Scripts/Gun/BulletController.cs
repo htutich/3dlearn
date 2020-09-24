@@ -7,33 +7,25 @@ public class BulletController : MonoBehaviour
 
     private float _speed = 10f;
     private float _lifeTime = 1f;
+    private int _minDamage = 10;
+    private int _maxDamage = 40;
     private int _damageToGive;
 
     #endregion
 
 
-    #region Start
+    #region UnityMethods
 
     private void Start()
     {
-        _damageToGive = Random.Range(20, 30);
+        _damageToGive = Random.Range(_minDamage, _maxDamage);
         Destroy(gameObject, _lifeTime);
     }
-
-    #endregion
-
-
-    #region Update
 
     private void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
-
-    #endregion
-
-
-    #region OnCollisionEnter
 
     private void OnCollisionEnter(Collision other)
     {

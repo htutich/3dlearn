@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
 {
     #region PrivateData
 
-    private Rigidbody _myRB;
+    private Rigidbody _myRigidbody;
     private float _speedMove = 2.0f;
+    private float _heightJump = 5.0f;
     private float rayLength;
     private bool _playerOnGround = false;
     private int _kills = 0;
     private int _maxKills = 10;
 
     [SerializeField] private Camera _mainCamera;
-    [SerializeField] private Text _score;
 
     #endregion
 
@@ -28,48 +27,32 @@ public class PlayerController : MonoBehaviour
     #endregion
 
 
-    #region OnEnable
-
+    #region UnityMethods
+    
     private void OnEnable()
     {
         EnemyHealthManager.onEnemyDie += EnemyDie;
     }
-
-    #endregion
-
-
-    #region OnDisable
 
     private void OnDisable()
     {
         EnemyHealthManager.onEnemyDie -= EnemyDie;
     }
 
-    #endregion
-
-
-    #region Start
-
     private void Start()
     {
-        _myRB = GetComponent<Rigidbody>();
-        _score.text = $"Score: {_kills}";
+        _myRigidbody = GetComponent<Rigidbody>();
     }
-
-    #endregion
-    
-
-    #region Update
 
     private void Update()
     {
         float vectorX = Input.GetAxisRaw("Horizontal") * _speedMove;
         float vectorZ = Input.GetAxisRaw("Vertical") * _speedMove;
-        _myRB.velocity = new Vector3(vectorX, _myRB.velocity.y, vectorZ);
+        _myRigidbody.velocity = new Vector3(vectorX, _myRigidbody.velocity.y, vectorZ);
 
         if (Input.GetKey(KeyCode.Space) && _playerOnGround)
         {
-            _myRB.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+            _myRigidbody.AddForce(new Vector3(0, _heightJump, 0), ForceMode.Impulse);
             _playerOnGround = false;
         }
 
@@ -87,11 +70,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #endregion
-
-
-    #region OnCollisionEnter
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
@@ -108,7 +86,6 @@ public class PlayerController : MonoBehaviour
     private void EnemyDie()
     {
         _kills++;
-        _score.text = $"Score: {_kills} / {_maxKills}";
 
         if (_kills >= _maxKills)
         {

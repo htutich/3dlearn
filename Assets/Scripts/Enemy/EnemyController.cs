@@ -5,53 +5,42 @@ public class EnemyController : MonoBehaviour
 {
     #region PrivateData
 
-    private Rigidbody _myRB;
+    private Rigidbody _myRigidbody;
+    private GameObject _player;
     private float _speedMove = 1.2f;
-    private GameObject _thePlayer;
 
     #endregion
 
 
-    #region Start
+    #region UnityMethods
 
     private void Start()
     {
-        _myRB = GetComponent<Rigidbody>();
+        _myRigidbody = GetComponent<Rigidbody>();
     }
-
-    #endregion
-
-
-    #region Update
 
     private void Update()
     {
-        if (_thePlayer != null)
+        if (_player != null)
         {
-            transform.LookAt(_thePlayer.transform.position);
+            transform.LookAt(_player.transform.position);
 
-            var vectorX = _thePlayer.transform.position.x - transform.position.x;
-            var vectorZ = _thePlayer.transform.position.z - transform.position.z;
+            var vectorX = _player.transform.position.x - transform.position.x;
+            var vectorZ = _player.transform.position.z - transform.position.z;
             var vectorMove = new Vector3(vectorX, 0.0f, vectorZ);
             vectorMove.Normalize();
-            _myRB.velocity = vectorMove * _speedMove;
+            _myRigidbody.velocity = vectorMove * _speedMove;
         }
     }
-
-    #endregion
-
-
-    #region OnTriggerEnter
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _thePlayer = other.gameObject;
+            _player = other.gameObject;
         }
     }
 
     #endregion
-
 }
 

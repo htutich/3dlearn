@@ -675,8 +675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c077396def562a459ab1c6368601802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemySpawnPoint: {fileID: 979424613}
-  Enemy: {fileID: 8587325744855717439, guid: 6e656d149cad8b84fb3718cd2d4fea94, type: 3}
+  _enemySpawnPoint: {fileID: 979424613}
+  _enemy: {fileID: 8587325744855717439, guid: 6e656d149cad8b84fb3718cd2d4fea94, type: 3}
 --- !u!65 &728785547
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -10,11 +10,11 @@ public class DoorController : MonoBehaviour
     #endregion
 
 
-    #region OnTriggerEnter
+    #region UnityMethods
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             Destroy(Door);
         }

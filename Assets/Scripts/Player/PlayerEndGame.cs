@@ -10,27 +10,17 @@ public class PlayerEndGame : MonoBehaviour
     #endregion
 
 
-    #region OnEnable
+    #region UnityMethods
 
     private void OnEnable()
     {
         PlayerController.onPlayerEndGame += EndGame;
     }
 
-    #endregion
-
-
-    #region OnDisable
-
     private void OnDisable()
     {
         PlayerController.onPlayerEndGame -= EndGame;
     }
-
-    #endregion
-
-
-    #region Start
 
     private void Start()
     {

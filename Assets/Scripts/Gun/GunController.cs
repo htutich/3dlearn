@@ -7,8 +7,6 @@ public class GunController : MonoBehaviour
 
     private float _timeBetweenShots = 0.3f;
     private float _shotCounter;
-    private float _bulletSpeed = 2.0f;
-    
     private AudioSource _audioSource;
     [SerializeField] private Transform _ShootPoint;
     [SerializeField] private GameObject _bullet;
@@ -16,37 +14,22 @@ public class GunController : MonoBehaviour
     #endregion
 
 
-    #region OnEnable
+    #region UnityMethods
 
     private void OnEnable()
     {
         PlayerController.onPlayerShoot += PlayerShoot;
     }
 
-    #endregion
-
-
-    #region OnDisable
-
     private void OnDisable()
     {
         PlayerController.onPlayerShoot -= PlayerShoot;
     }
 
-    #endregion
-
-
-    #region Start
-
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
     }
-
-    #endregion
-
-
-    #region Update
 
     private void Update()
     {
@@ -59,7 +42,7 @@ public class GunController : MonoBehaviour
     #endregion
 
 
-    #region onPlayerShoot
+    #region Methods
 
     private void PlayerShoot()
     {
