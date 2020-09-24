@@ -3,7 +3,7 @@
 
 public class EnemyController : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     private Rigidbody _myRigidbody;
     private GameObject _player;

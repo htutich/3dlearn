@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     private int _kills = 0;
     private int _maxKills = 10;

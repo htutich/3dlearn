@@ -3,7 +3,7 @@
 
 public class PlayerController : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     private Rigidbody _myRigidbody;
     private float _speedMove = 2.0f;

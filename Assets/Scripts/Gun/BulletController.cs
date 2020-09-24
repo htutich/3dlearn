@@ -3,7 +3,7 @@
 
 public class BulletController : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     private float _speed = 10f;
     private float _lifeTime = 1f;

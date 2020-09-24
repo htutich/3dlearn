@@ -3,7 +3,7 @@
 
 public class GunController : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     private float _timeBetweenShots = 0.3f;
     private float _shotCounter;

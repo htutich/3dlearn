@@ -3,7 +3,7 @@
 
 public class PlayerEndGame : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     [SerializeField] private GameObject _completeGameUI;
 

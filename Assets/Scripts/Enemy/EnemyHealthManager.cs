@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthManager : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     private float _health = 100.0f;
     private float _currentHealth;

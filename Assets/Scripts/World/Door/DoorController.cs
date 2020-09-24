@@ -3,7 +3,7 @@
 
 public class DoorController : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     [SerializeField] private GameObject Door;
 

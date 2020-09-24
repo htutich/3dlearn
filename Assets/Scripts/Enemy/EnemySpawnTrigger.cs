@@ -3,7 +3,7 @@
 
 public class EnemySpawnTrigger : MonoBehaviour
 {
-    #region PrivateData
+    #region Fields
 
     [SerializeField] private Transform _enemySpawnPoint;
     [SerializeField] private GameObject _enemy;
