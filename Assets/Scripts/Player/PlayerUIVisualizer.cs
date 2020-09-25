@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -15,12 +16,12 @@ public class PlayerUIVisualizer : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.actions.onPlayerShowScore += PlayerShowScore;
+        EventManager.StartListening("PlayerShowScore", PlayerShowScore);
     }
 
     private void OnDisable()
     {
-        EventManager.actions.onPlayerShowScore -= PlayerShowScore;
+        EventManager.StopListening("PlayerShowScore", PlayerShowScore);
     }
 
     #endregion
@@ -28,9 +29,9 @@ public class PlayerUIVisualizer : MonoBehaviour
 
     #region Methods
 
-    private void PlayerShowScore(int minValue, int maxValue)
+    private void PlayerShowScore(EventParam eventParam)
     {
-        _score.text = $"Score: {minValue} / {maxValue}";
+        _score.text = $"Score: {eventParam.kills} / {eventParam.maxKills}";
     }
 
     #endregion

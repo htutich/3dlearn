@@ -1,51 +1,82 @@
-﻿using UnityEngine;
-
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public static EventManager actions;
 
-    public delegate void PlayerAction();
-    public delegate void PlayerScoreAction(int minValue = 0, int maxValue = 0);
-    public delegate void EnemyAction();
+    private Dictionary<string, Action<EventParam>> eventDictionary;
 
-    public event PlayerAction onPlayerShoot;
-    public event PlayerAction onPlayerEndGame;
-    public event PlayerScoreAction onPlayerShowScore;
-    public event EnemyAction onEnemyDie;
+    private static EventManager eventManager;
 
-
-    #region UnityMethods
-
-    private void Awake()
+    public static EventManager instance
     {
-        actions = this;
+        get
+        {
+            if (!eventManager)
+            {
+                eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
+
+                if (!eventManager)
+                {
+                    Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
+                }
+                else
+                {
+                    eventManager.Init();
+                }
+            }
+            return eventManager;
+        }
     }
 
-    #endregion
-
-
-    #region Methods
-
-    public void PlayerShoot()
+    void Init()
     {
-        onPlayerShoot?.Invoke();
+        if (eventDictionary == null)
+        {
+            eventDictionary = new Dictionary<string, Action<EventParam>>();
+        }
     }
 
-    public void PlayerEndGame()
+    public static void StartListening(string eventName, Action<EventParam> listener)
     {
-        onPlayerEndGame?.Invoke();
+        Action<EventParam> thisEvent;
+        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent += listener;
+            instance.eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            thisEvent += listener;
+            instance.eventDictionary.Add(eventName, thisEvent);
+        }
     }
 
-    public void PlayerShowScore(int minValue = 0, int maxValue = 0)
+    public static void StopListening(string eventName, Action<EventParam> listener)
     {
-        onPlayerShowScore?.Invoke(minValue, maxValue);
+        if (eventManager == null) return;
+        Action<EventParam> thisEvent;
+        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent -= listener;
+            instance.eventDictionary[eventName] = thisEvent;
+        }
     }
 
-    public void EnemyDie()
+    public static void TriggerEvent(string eventName, EventParam eventParam = default(EventParam))
     {
-        onEnemyDie?.Invoke();
+        Action<EventParam> thisEvent = null;
+        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent.Invoke(eventParam);
+        }
     }
+}
 
-    #endregion
+public struct EventParam
+{
+    public int kills;
+    public int maxKills;
 }

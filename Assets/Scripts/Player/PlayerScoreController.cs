@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerScoreController : MonoBehaviour
 {
@@ -13,17 +14,21 @@ public class PlayerScoreController : MonoBehaviour
     #region UnityMethods
     private void OnEnable()
     {
-        EventManager.actions.onEnemyDie += EnemyDie;
+        EventManager.StartListening("EnemyDie", EnemyDie);
     }
 
     private void OnDisable()
     {
-        EventManager.actions.onEnemyDie -= EnemyDie;
+        EventManager.StopListening("EnemyDie", EnemyDie);
     }
 
     private void Start()
     {
-        EventManager.actions.PlayerShowScore(_kills, _maxKills);
+        EventParam currentParams = new EventParam();
+        currentParams.kills = _kills;
+        currentParams.maxKills = _maxKills;
+
+        EventManager.TriggerEvent("PlayerShowScore", currentParams);
     }
 
     #endregion
@@ -31,16 +36,19 @@ public class PlayerScoreController : MonoBehaviour
 
     #region Methods
 
-    private void EnemyDie()
+    private void EnemyDie(EventParam eventParam)
     {
         _kills++;
 
         if (_kills >= _maxKills)
         {
-            EventManager.actions.PlayerEndGame();
+            EventManager.TriggerEvent("PlayerEndGame");
         } else
         {
-            EventManager.actions.PlayerShowScore(_kills, _maxKills);
+            EventParam currentParams = new EventParam();
+            currentParams.kills = _kills;
+            currentParams.maxKills = _maxKills;
+            EventManager.TriggerEvent("PlayerShowScore", currentParams);
         }
     }
 

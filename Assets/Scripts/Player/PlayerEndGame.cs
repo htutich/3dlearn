@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 public class PlayerEndGame : MonoBehaviour
@@ -14,12 +15,12 @@ public class PlayerEndGame : MonoBehaviour
 
     private void OnEnable()
     {
-        //PlayerController.onPlayerEndGame += EndGame;
+        EventManager.StartListening("PlayerEndGame", EndGame);
     }
 
     private void OnDisable()
     {
-        //PlayerController.onPlayerEndGame -= EndGame;
+        EventManager.StopListening("PlayerEndGame", EndGame);
     }
 
     private void Start()
@@ -32,7 +33,7 @@ public class PlayerEndGame : MonoBehaviour
 
     #region Methods
 
-    private void EndGame()
+    private void EndGame(EventParam eventParams)
     {
         _completeGameUI.SetActive(true);
     }

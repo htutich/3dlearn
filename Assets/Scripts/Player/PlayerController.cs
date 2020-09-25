@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            EventManager.actions.PlayerShoot();
+            EventManager.TriggerEvent("PlayerShoot");
         }
     }
 

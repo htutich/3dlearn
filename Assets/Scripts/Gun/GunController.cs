@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 public class GunController : MonoBehaviour
@@ -18,12 +19,12 @@ public class GunController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.actions.onPlayerShoot += PlayerShoot;
+        EventManager.StartListening("PlayerShoot", PlayerShoot);
     }
 
     private void OnDisable()
     {
-        EventManager.actions.onPlayerShoot -= PlayerShoot;
+        EventManager.StopListening("PlayerShoot", PlayerShoot);
     }
 
     private void Start()
@@ -44,7 +45,7 @@ public class GunController : MonoBehaviour
 
     #region Methods
 
-    private void PlayerShoot()
+    private void PlayerShoot(EventParam eventParam)
     {
         if (_shotCounter <= 0.0f)
         {

@@ -28,7 +28,7 @@ public class EnemyHealthManager : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
-            EventManager.actions.EnemyDie();
+            EventManager.TriggerEvent("EnemyDie");
             Destroy(gameObject);
         }
     }
