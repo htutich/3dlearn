@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
 
-public class EnemyController : MonoBehaviour
+public class EnemyTurretController : MonoBehaviour
 {
     #region Fields
 
+    [SerializeField] private Transform _turretHead;
+
     private Rigidbody _myRigidbody;
     private GameObject _player;
-    private float _speedMove = 1.2f;
-    private float _playerCheckArea = 5.0f;
+    private float _playerCheckArea = 3.5f;
 
     #endregion
 
@@ -26,16 +27,9 @@ public class EnemyController : MonoBehaviour
         var distanceToPlayer = (_player.transform.position - transform.position).sqrMagnitude;
         if (distanceToPlayer < _playerCheckArea * _playerCheckArea)
         {
-            transform.LookAt(_player.transform.position);
-
-            var vectorX = _player.transform.position.x - transform.position.x;
-            var vectorZ = _player.transform.position.z - transform.position.z;
-            var vectorMove = new Vector3(vectorX, 0.0f, vectorZ);
-            vectorMove.Normalize();
-            _myRigidbody.velocity = vectorMove * _speedMove;
+            _turretHead.LookAt(_player.transform.position);
         }
     }
 
     #endregion
 }
-

@@ -420,7 +420,6 @@ GameObject:
   - component: {fileID: 1357831301118808662}
   - component: {fileID: 6487410668801003083}
   - component: {fileID: 5246401298608846234}
-  - component: {fileID: 7046588589624531347}
   - component: {fileID: 7733136553456316416}
   m_Layer: 0
   m_Name: Enemy
@@ -547,19 +546,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &7046588589624531347
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8587325744855717439}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 0.5, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &7733136553456316416
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8,16 +8,21 @@ public class EnemySpawnTrigger : MonoBehaviour
     [SerializeField] private Transform _enemySpawnPoint;
     [SerializeField] private GameObject _enemy;
 
+    private int _maxEnemyCount = 10;
     #endregion
 
 
     #region UnityMethods
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Instantiate(_enemy, _enemySpawnPoint);
+            if (_maxEnemyCount > 0)
+            {
+                _maxEnemyCount--;
+                Instantiate(_enemy, _enemySpawnPoint);
+            }
         }
     }
 

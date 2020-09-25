@@ -14,12 +14,12 @@ public class PlayerEndGame : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.onPlayerEndGame += EndGame;
+        //PlayerController.onPlayerEndGame += EndGame;
     }
 
     private void OnDisable()
     {
-        PlayerController.onPlayerEndGame -= EndGame;
+        //PlayerController.onPlayerEndGame -= EndGame;
     }
 
     private void Start()

@@ -5,19 +5,11 @@ using UnityEngine.UI;
 public class EnemyHealthManager : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private Slider _slider;
 
     private float _health = 100.0f;
     private float _currentHealth;
     private AudioSource _audioSource;
-    [SerializeField] private Slider _slider;
-
-    #endregion
-
-
-    #region Events
-
-    public delegate void EnemyAction();
-    public static event EnemyAction onEnemyDie;
 
     #endregion
 
@@ -36,7 +28,7 @@ public class EnemyHealthManager : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
-            onEnemyDie();
+            EventManager.actions.EnemyDie();
             Destroy(gameObject);
         }
     }

@@ -18,12 +18,12 @@ public class GunController : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.onPlayerShoot += PlayerShoot;
+        EventManager.actions.onPlayerShoot += PlayerShoot;
     }
 
     private void OnDisable()
     {
-        PlayerController.onPlayerShoot -= PlayerShoot;
+        EventManager.actions.onPlayerShoot -= PlayerShoot;
     }
 
     private void Start()

@@ -4,40 +4,18 @@
 public class PlayerController : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private Camera _mainCamera;
 
     private Rigidbody _myRigidbody;
     private float _speedMove = 2.0f;
     private float _heightJump = 5.0f;
     private float rayLength;
     private bool _playerOnGround = false;
-    private int _kills = 0;
-    private int _maxKills = 10;
-
-    [SerializeField] private Camera _mainCamera;
-
-    #endregion
-
-
-    #region Events
-
-    public delegate void PlayerAction();
-    public static event PlayerAction onPlayerShoot;
-    public static event PlayerAction onPlayerEndGame;
 
     #endregion
 
 
     #region UnityMethods
-    
-    private void OnEnable()
-    {
-        EnemyHealthManager.onEnemyDie += EnemyDie;
-    }
-
-    private void OnDisable()
-    {
-        EnemyHealthManager.onEnemyDie -= EnemyDie;
-    }
 
     private void Start()
     {
@@ -66,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            onPlayerShoot();
+            EventManager.actions.PlayerShoot();
         }
     }
 
@@ -75,21 +53,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             _playerOnGround = true;
-        }
-    }
-
-    #endregion
-
-
-    #region Methods
-
-    private void EnemyDie()
-    {
-        _kills++;
-
-        if (_kills >= _maxKills)
-        {
-            onPlayerEndGame();
         }
     }
 
