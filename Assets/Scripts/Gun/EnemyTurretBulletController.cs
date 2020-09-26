@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class BulletController : MonoBehaviour
+public class EnemyTurretBulletController : MonoBehaviour
 {
     #region Fields
 
@@ -29,8 +29,8 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        var EnemyHealthManager = other.gameObject.GetComponent<EnemyHealthManager>();
-        EnemyHealthManager?.HurtEnemy(_damageToGive);
+        var PlayerHealthManager = other.gameObject.GetComponent<PlayerHealthManager>();
+        PlayerHealthManager?.HurtPlayer(_damageToGive);
         Destroy(gameObject);
     }
 

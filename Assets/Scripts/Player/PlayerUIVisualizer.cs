@@ -7,6 +7,7 @@ public class PlayerUIVisualizer : MonoBehaviour
     #region Fields
 
     [SerializeField] private Text _score;
+    [SerializeField] private GameObject _canvas;
 
     #endregion
 
@@ -23,6 +24,10 @@ public class PlayerUIVisualizer : MonoBehaviour
         EventManager.StopListening("PlayerShowScore", PlayerShowScore);
     }
 
+    private void Start()
+    {
+        _canvas.SetActive(true);
+    }
     #endregion
 
 

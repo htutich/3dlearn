@@ -1,33 +1,53 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class EnemyTurretController : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private Transform _turretHead;
-
-    private Rigidbody _myRigidbody;
     private GameObject _player;
-    private float _playerCheckArea = 3.5f;
+    private float _playerCheckArea = 5f;
+    private Ray _ray;
+    private RaycastHit _raycastHit;
+    private string _uniqueID;
+    private bool _hasPlayer = true;
 
     #endregion
-
 
     #region UnityMethods
 
     private void Start()
     {
-        _myRigidbody = GetComponent<Rigidbody>();
+        _uniqueID = Guid.NewGuid().ToString();
+        var EnemyTurretShootController = gameObject.GetComponentInChildren<EnemyTurretShootController>();
+            EnemyTurretShootController.UniqueID = _uniqueID;
         _player = FindObjectOfType<PlayerController>().gameObject;
     }
 
     private void Update()
     {
-        var distanceToPlayer = (_player.transform.position - transform.position).sqrMagnitude;
-        if (distanceToPlayer < _playerCheckArea * _playerCheckArea)
+        if (_hasPlayer)
         {
-            _turretHead.LookAt(_player.transform.position);
+            var distancePlayerCheck = (_player.transform.position - transform.position).sqrMagnitude;
+            if (distancePlayerCheck < _playerCheckArea * _playerCheckArea)
+            {
+                transform.LookAt(_player.transform.position);
+                Debug.DrawLine(transform.position, _player.transform.position, Color.blue);
+
+                var startRaycastPosition = transform.position;
+                var playerPosition = _player.transform.position - startRaycastPosition;
+                var rayCast = Physics.Raycast(startRaycastPosition, playerPosition, out _raycastHit, playerPosition.magnitude, ~ (1 << LayerMask.GetMask("Player")));
+                
+                Debug.Log(_raycastHit.collider.gameObject.tag);
+                if (rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
+                {
+                    EventParam currentParams = new EventParam();
+                    currentParams.uniqueID = _uniqueID;
+
+                    EventManager.TriggerEvent("TurretShoot", currentParams);
+                }
+            }
         }
     }
 

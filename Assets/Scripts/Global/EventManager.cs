@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+    #region Fields
 
     private Dictionary<string, Action<EventParam>> eventDictionary;
-
     private static EventManager eventManager;
+
+    #endregion
+
+
+    #region Properties
 
     public static EventManager instance
     {
@@ -31,7 +36,12 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    void Init()
+    #endregion
+
+
+    #region Methods
+
+    private void Init()
     {
         if (eventDictionary == null)
         {
@@ -73,10 +83,6 @@ public class EventManager : MonoBehaviour
             thisEvent.Invoke(eventParam);
         }
     }
-}
 
-public struct EventParam
-{
-    public int kills;
-    public int maxKills;
+    #endregion
 }

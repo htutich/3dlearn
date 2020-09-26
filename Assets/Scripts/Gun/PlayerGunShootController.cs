@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 
-public class GunController : MonoBehaviour
+public class PlayerGunShootController : MonoBehaviour
 {
     #region Fields
 
