@@ -5,7 +5,7 @@ public class PlayerGunShootController : MonoBehaviour
 {
     #region Fields
 
-    private float _timeBetweenShots = 0.3f;
+    private float _timeBetweenShots = 0.2f;
     private float _shotCounter;
     private AudioSource _audioSource;
     [SerializeField] private Transform _ShootPoint;

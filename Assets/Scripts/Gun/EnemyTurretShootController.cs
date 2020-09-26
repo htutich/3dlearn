@@ -11,12 +11,15 @@ public class EnemyTurretShootController : MonoBehaviour
     private AudioSource _audioSource;
 
     private string _uniqueID;
-    private float _timeBetweenShots = 0.3f;
-    private float _timeBetweenCanonShots = 0.15f;
+    private float _timeBetweenShots = 0.2f;
+    private float _timeBetweenCanonShots = 0.1f;
     private float _firstShotCounter = 0.0f;
     private float _secondShotCounter = 0.0f;
 
     #endregion
+
+
+    #region Properties
 
     public string UniqueID
     {
@@ -25,6 +28,9 @@ public class EnemyTurretShootController : MonoBehaviour
            _uniqueID = value;
         }
     }
+
+    #endregion
+
 
     #region UnityMethods
 

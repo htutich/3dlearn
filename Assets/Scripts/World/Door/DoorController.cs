@@ -6,8 +6,8 @@ public class DoorController : MonoBehaviour
     #region Fields
 
     [SerializeField] private GameObject _door;
-
     private float _doorOpenHeight = 2.0f;
+    private bool _canPlayerOpenDoor = true;
 
     #endregion
 
@@ -18,7 +18,11 @@ public class DoorController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _door.transform.position = new Vector3(_door.transform.position.x, _door.transform.position.y + _doorOpenHeight, _door.transform.position.z);
+            if (_canPlayerOpenDoor)
+            {
+                _door.SetActive(false);
+                _canPlayerOpenDoor = false;
+            }
         }
     }
 
@@ -26,7 +30,11 @@ public class DoorController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _door.transform.position = new Vector3(_door.transform.position.x, _door.transform.position.y - _doorOpenHeight, _door.transform.position.z);
+            if (!_canPlayerOpenDoor)
+            {
+                _door.SetActive(true);
+                _canPlayerOpenDoor = true;
+            }
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class EnemyHealthManager : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private GameObject _canvas;
     [SerializeField] private Slider _slider;
 
     private float _health = 100.0f;
@@ -18,6 +19,7 @@ public class EnemyHealthManager : MonoBehaviour
 
     private void Start()
     {
+        _canvas.SetActive(true);
         _audioSource = GetComponent<AudioSource>();
 
         _currentHealth = _health;

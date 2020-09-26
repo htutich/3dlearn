@@ -7,8 +7,10 @@ public class EnemySpawnTrigger : MonoBehaviour
 
     [SerializeField] private Transform _enemySpawnPoint;
     [SerializeField] private GameObject _enemy;
-
+    private float _minSpawnRadius = -3.0f;
+    private float _maxSpawnRadius = 3.0f;
     private int _maxEnemyCount = 10;
+
     #endregion
 
 
@@ -21,7 +23,9 @@ public class EnemySpawnTrigger : MonoBehaviour
             if (_maxEnemyCount > 0)
             {
                 _maxEnemyCount--;
-                Instantiate(_enemy, _enemySpawnPoint);
+                var random = Random.Range(_minSpawnRadius, _maxSpawnRadius);
+                var spawnPosition = new Vector3(_enemySpawnPoint.transform.position.x + random, _enemySpawnPoint.transform.position.y, _enemySpawnPoint.transform.position.z + random);
+                Instantiate(_enemy, spawnPosition, _enemySpawnPoint.rotation);
             }
         }
     }

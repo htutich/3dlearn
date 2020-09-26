@@ -166,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ee96a38ac00d3574bb70a644099ff73e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -245,7 +245,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ee96a38ac00d3574bb70a644099ff73e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e624a2688af17946a4ac11d0730d8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 8657512716211235314}
   _slider: {fileID: 3640042033093256915}
 --- !u!1 &8083410749866292522
 GameObject:
@@ -782,7 +783,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2ac488415664f0046825edf996d58656, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -822,6 +823,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 467893355825908033}
     m_Modifications:
+    - target: {fileID: 1522555191760904082, guid: 7181e03efc23cf34d9485a2c05e51922,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1078a323a00023640a0b11ae62c16f0f, type: 2}
     - target: {fileID: 3071691121777037207, guid: 7181e03efc23cf34d9485a2c05e51922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -882,6 +888,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyGun
       objectReference: {fileID: 0}
+    - target: {fileID: 9052809465745441946, guid: 7181e03efc23cf34d9485a2c05e51922,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1078a323a00023640a0b11ae62c16f0f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7181e03efc23cf34d9485a2c05e51922, type: 3}
 --- !u!4 &6791159381437465592 stripped

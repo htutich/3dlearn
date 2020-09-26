@@ -7,8 +7,8 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody _myRigidbody;
     private GameObject _player;
-    private float _speedMove = 1.2f;
-    private float _playerCheckArea = 5.0f;
+    private float _speedMove = 0.6f;
+    private float _playerCheckArea = 7.0f;
 
     #endregion
 

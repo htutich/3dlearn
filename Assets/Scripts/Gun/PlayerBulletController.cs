@@ -6,7 +6,7 @@ public class PlayerBulletController : MonoBehaviour
     #region Fields
 
     private float _speed = 10f;
-    private float _lifeTime = 1f;
+    private float _lifeTime = 1.5f;
     private int _minDamage = 10;
     private int _maxDamage = 40;
     private int _damageToGive;
@@ -31,6 +31,10 @@ public class PlayerBulletController : MonoBehaviour
     {
         var EnemyHealthManager = other.gameObject.GetComponent<EnemyHealthManager>();
         EnemyHealthManager?.HurtEnemy(_damageToGive);
+
+        var DoorHealthManager = other.gameObject.GetComponent<DoorHealthManager>();
+        DoorHealthManager?.HurtEnemy(_damageToGive);
+
         Destroy(gameObject);
     }
 

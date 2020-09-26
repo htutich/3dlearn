@@ -2,41 +2,25 @@
 using UnityEngine.UI;
 
 
-public class PlayerHealthManager : MonoBehaviour
+public class DoorHealthManager : MonoBehaviour
 {
     #region Fields
 
+    [SerializeField] private GameObject _canvas;
     [SerializeField] private Slider _slider;
 
-    private float _health = 1000.0f;
+    private float _health = 100.0f;
     private float _currentHealth;
     private AudioSource _audioSource;
 
     #endregion
 
 
-    #region Properties
-
-    public float Health
-    {
-        get
-        {
-            return _health;
-        }
-    }
-    public float CurrentHealth
-    {
-        get
-        {
-            return _currentHealth;
-        }
-    }
-    #endregion
-
     #region UnityMethods
 
     private void Start()
     {
+        _canvas.SetActive(true);
         _audioSource = GetComponent<AudioSource>();
 
         _currentHealth = _health;
@@ -47,7 +31,6 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
-            EventManager.TriggerEvent("PlayerDie");
             Destroy(gameObject);
         }
     }
@@ -57,17 +40,10 @@ public class PlayerHealthManager : MonoBehaviour
 
     #region Methods
 
-    public void HurtPlayer(float damage)
+    public void HurtEnemy(float damage)
     {
         _audioSource.Play();
-
         _currentHealth -= damage;
-        _slider.value = CalculateHealth();
-    }
-
-    public void HealPlayer(float health)
-    {
-        _currentHealth += health;
         _slider.value = CalculateHealth();
     }
 

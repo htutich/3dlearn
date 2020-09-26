@@ -16,6 +16,8 @@ TagManager:
   - UI
   - 
   - 
+  - Turret
+  - World
   - 
   - 
   - 
@@ -37,9 +39,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
   m_SortingLayers:
   - name: Default
     uniqueID: 0
