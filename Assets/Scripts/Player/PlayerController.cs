@@ -24,22 +24,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        float vectorX = Input.GetAxisRaw("Horizontal") * _speedMove;
-        float vectorZ = Input.GetAxisRaw("Vertical") * _speedMove;
-        _myRigidbody.velocity = new Vector3(vectorX, _myRigidbody.velocity.y, vectorZ);
-
-        if (Input.GetKey(KeyCode.Space) && _playerOnGround)
+        if (_playerOnGround)
         {
-            _myRigidbody.AddForce(new Vector3(0, _heightJump, 0), ForceMode.Impulse);
-            _playerOnGround = false;
-        }
+            Look();
+            Walk();
 
-        var cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        var groundPlane = new Plane(Vector3.up, Vector3.zero);
-        if (groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            var pointToLook = cameraRay.GetPoint(rayLength);
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Jump();
+            }
         }
 
         if (Input.GetMouseButton(0))
@@ -53,6 +46,34 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             _playerOnGround = true;
+        }
+    }
+
+    #endregion
+
+    #region Methods
+
+    private void Walk()
+    {
+        float vectorX = Input.GetAxisRaw("Horizontal") * _speedMove;
+        float vectorZ = Input.GetAxisRaw("Vertical") * _speedMove;
+        _myRigidbody.velocity = new Vector3(vectorX, _myRigidbody.velocity.y, vectorZ);
+    }
+
+    private void Jump()
+    {
+        _myRigidbody.AddForce(new Vector3(0, _heightJump, 0), ForceMode.Impulse);
+        _playerOnGround = false;
+    }
+
+    private void Look()
+    {
+        var cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        var groundPlane = new Plane(Vector3.up, Vector3.zero);
+        if (groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            var pointToLook = cameraRay.GetPoint(rayLength);
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
     }
 

@@ -39,7 +39,6 @@ public class EnemyTurretController : MonoBehaviour
                 var playerPosition = _player.transform.position - startRaycastPosition;
                 var rayCast = Physics.Raycast(startRaycastPosition, playerPosition, out _raycastHit, playerPosition.magnitude, ~ (1 << LayerMask.GetMask("Player")));
                 
-                Debug.Log(_raycastHit.collider.gameObject.tag);
                 if (rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
                 {
                     EventParam currentParams = new EventParam();

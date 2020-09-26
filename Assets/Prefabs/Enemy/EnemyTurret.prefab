@@ -439,7 +439,6 @@ GameObject:
   - component: {fileID: 7243348810201820259}
   - component: {fileID: 6122571460675184585}
   - component: {fileID: -173327617084808749}
-  - component: {fileID: 4993726586448295115}
   - component: {fileID: 247239962211928562}
   m_Layer: 8
   m_Name: EnemyTurret
@@ -575,18 +574,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4993726586448295115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5497790480030193093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2578a9d9d21c8409439d0c1ccedd46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &247239962211928562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,6 +733,7 @@ GameObject:
   - component: {fileID: 467893355825908033}
   - component: {fileID: 7001761048294201149}
   - component: {fileID: 7052739820622843587}
+  - component: {fileID: 5796188995503067959}
   m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
@@ -815,6 +803,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5796188995503067959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711504543020524065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2578a9d9d21c8409439d0c1ccedd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8403679199467506799
 PrefabInstance:
   m_ObjectHideFlags: 0
