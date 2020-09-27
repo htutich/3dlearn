@@ -4,30 +4,16 @@ public class Room : MonoBehaviour
 {
     #region Fields
 
-    public Transform roomDoorUp;
-    public Transform roomDoorDown;
-    public Transform roomDoorLeft;
-    public Transform roomDoorRight;
+    public GameObject roomDoorUp;
+    public GameObject roomDoorDown;
+    public GameObject roomDoorLeft;
+    public GameObject roomDoorRight;
 
-    public bool hasRoomDoorUp = false;
-    public bool hasRoomDoorDown = false;
-    public bool hasRoomDoorLeft = false;
-    public bool hasRoomDoorRight = false;
-
-    private float _roomRadiusCenter = 5.1f;
+    public Transform roomTransformDoorUp;
+    public Transform roomTransformDoorDown;
+    public Transform roomTransformDoorLeft;
+    public Transform roomTransformDoorRight;
 
     #endregion
 
-
-    #region Properties
-
-    public float RoomRadiusCenter
-    {
-        get
-        {
-            return _roomRadiusCenter;
-        }
-    }
-
-    #endregion
 }
