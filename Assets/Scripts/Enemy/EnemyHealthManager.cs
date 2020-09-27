@@ -6,6 +6,7 @@ public class EnemyHealthManager : MonoBehaviour
 {
     #region Fields
 
+    [SerializeField] private GameObject _firstAidKit;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Slider _slider;
 
@@ -31,6 +32,7 @@ public class EnemyHealthManager : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
+            Instantiate(_firstAidKit, new Vector3(transform.position.x, 0.0f, transform.position.z), transform.rotation);
             EventManager.TriggerEvent("EnemyDie");
             Destroy(gameObject);
         }

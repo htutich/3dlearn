@@ -517,6 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e624a2688af17946a4ac11d0730d8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firstAidKit: {fileID: 2132538228680051711, guid: 318db950715c41048ba54c54b496b17c,
+    type: 3}
   _canvas: {fileID: 1789372045221343288}
   _slider: {fileID: 6048208076995411886}
 --- !u!114 &6487410668801003083

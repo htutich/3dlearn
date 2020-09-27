@@ -50,7 +50,6 @@ public class PlayerHealthManager : MonoBehaviour
         if (_currentHealth <= 0)
         {
             EventManager.TriggerEvent("PlayerDie");
-            Destroy(gameObject);
         }
     }
 

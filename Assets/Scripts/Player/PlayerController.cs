@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
 
     private Rigidbody _myRigidbody;
-    private float _speedMove = 2.0f;
+    private float _speedMove = 2.5f;
     private float _heightJump = 5.0f;
     private float rayLength;
     private bool _playerOnGround = false;

@@ -33,11 +33,13 @@ public class PlayerEndGame : MonoBehaviour
 
     private void WinGame(EventParam eventParams)
     {
+        Time.timeScale = 0.0f;
         _winGameUI.SetActive(true);
     }
 
     private void PlayerDie(EventParam eventParams)
     {
+        Time.timeScale = 0.0f;
         _loseGameUI.SetActive(true);
     }
     #endregion
