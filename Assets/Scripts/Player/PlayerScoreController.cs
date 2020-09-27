@@ -5,7 +5,7 @@ public class PlayerScoreController : MonoBehaviour
     #region Fields
 
     private int _kills = 0;
-    private int _maxKills = 10;
+    private int _maxKills = 50;
 
     #endregion
 
