@@ -31,7 +31,9 @@ public class PlayerHealthManager : MonoBehaviour
             return _currentHealth;
         }
     }
+
     #endregion
+
 
     #region UnityMethods
 

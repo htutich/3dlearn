@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class EnemyHealthManager : MonoBehaviour
 {
     #region Fields
+
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Slider _slider;
 
