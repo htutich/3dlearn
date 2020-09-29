@@ -7,10 +7,11 @@ public class EnemyTurretController : MonoBehaviour
     #region Fields
 
     private GameObject _player;
-    private float _playerCheckArea = 5f;
-    private Ray _ray;
     private RaycastHit _raycastHit;
+    private Ray _ray;
+
     private string _uniqueID;
+    private float _playerCheckArea = 5f;
     private bool _hasPlayer = true;
 
     #endregion

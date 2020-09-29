@@ -1,6 +1,4 @@
-﻿#region PrivateData
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public struct EventParam
 {
@@ -10,5 +8,3 @@ public struct EventParam
     public Transform dieTransform;
     public GameObject firstAidKit;
 }
-
-#endregion

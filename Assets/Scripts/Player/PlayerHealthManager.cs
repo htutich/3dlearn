@@ -7,10 +7,10 @@ public class PlayerHealthManager : MonoBehaviour
     #region Fields
 
     [SerializeField] private Slider _slider;
+    private AudioSource _audioSource;
 
     private float _health = 1000.0f;
     private float _currentHealth;
-    private AudioSource _audioSource;
 
     #endregion
 
@@ -24,6 +24,7 @@ public class PlayerHealthManager : MonoBehaviour
             return _health;
         }
     }
+
     public float CurrentHealth
     {
         get

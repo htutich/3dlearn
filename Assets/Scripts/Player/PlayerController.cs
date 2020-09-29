@@ -4,9 +4,10 @@
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private Camera _mainCamera;
 
+    [SerializeField] private Camera _mainCamera;
     private Rigidbody _myRigidbody;
+
     private float _speedMove = 2.5f;
     private float _heightJump = 5.0f;
     private float rayLength;
@@ -24,21 +25,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_playerOnGround)
-        {
-            Look();
-            Walk();
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Jump();
-            }
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            EventManager.TriggerEvent("PlayerShoot");
-        }
+        Movement();
+        Fire();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,8 +38,32 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+    
 
     #region Methods
+
+    private void Movement()
+    {
+        if (_playerOnGround)
+        {
+
+            Look();
+            Walk();
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Jump();
+            }
+        }
+    }
+
+    private void Fire()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            EventManager.TriggerEvent("PlayerShoot");
+        }
+    }
 
     private void Walk()
     {

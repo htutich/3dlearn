@@ -5,8 +5,8 @@ public class PlayerBulletController : MonoBehaviour
 {
     #region Fields
 
-    private float _speed = 20f;
-    private float _lifeTime = 2f;
+    private float _speed = 20.0f;
+    private float _lifeTime = 2.0f;
     private int _minDamage = 10;
     private int _maxDamage = 20;
     private int _damageToGive;

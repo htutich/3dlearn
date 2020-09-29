@@ -38,5 +38,4 @@ public class FirstAidKitController : MonoBehaviour
     }
 
     #endregion
-
 }

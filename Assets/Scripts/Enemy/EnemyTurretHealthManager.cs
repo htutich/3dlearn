@@ -8,10 +8,10 @@ public class EnemyTurretHealthManager : MonoBehaviour
 
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Slider _slider;
+    private AudioSource _audioSource;
 
     private float _health = 100.0f;
     private float _currentHealth;
-    private AudioSource _audioSource;
 
     #endregion
 

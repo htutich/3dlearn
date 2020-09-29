@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private float _minDamage = 10.0f;
     private float _maxDamage = 40.0f;
     private float _damageToGive;
+
     #endregion
 
 

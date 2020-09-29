@@ -7,6 +7,7 @@ public class EnemySpawnTrigger : MonoBehaviour
 
     [SerializeField] private Transform _enemySpawnPoint;
     [SerializeField] private GameObject _enemy;
+
     private float _minSpawnRadius = -3.0f;
     private float _maxSpawnRadius = 3.0f;
     private int _maxEnemyCount = 10;

@@ -28,6 +28,7 @@ public class PlayerUIVisualizer : MonoBehaviour
     {
         _canvas.SetActive(true);
     }
+
     #endregion
 
 

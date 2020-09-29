@@ -5,7 +5,7 @@ public class EnemyTurretBulletController : MonoBehaviour
 {
     #region Fields
 
-    private float _speed = 15f;
+    private float _speed = 15.0f;
     private float _lifeTime = 1.5f;
     private float _minDamage = 10.0f;
     private float _maxDamage = 40.0f;
