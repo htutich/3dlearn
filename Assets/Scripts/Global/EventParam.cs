@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public struct EventParam
+namespace learn3d
 {
-    public int kills;
-    public int maxKills;
-    public string uniqueID;
-    public Transform dieTransform;
-    public GameObject firstAidKit;
+    public struct EventParam
+    {
+        public int kills;
+        public int maxKills;
+        public string uniqueID;
+        public Transform dieTransform;
+        public GameObject firstAidKit;
+    }
 }

@@ -1,58 +1,60 @@
 ﻿using UnityEngine;
 
-
-public class PlayerGunShootController : MonoBehaviour
+namespace learn3d
 {
-    #region Fields
-    [SerializeField] private Transform _ShootPoint;
-    [SerializeField] private GameObject _bullet;
-    private AudioSource _audioSource;
-
-    private float _timeBetweenShots = 0.2f;
-    private float _shotCounter;
-
-    #endregion
-
-
-    #region UnityMethods
-
-    private void OnEnable()
+    public class PlayerGunShootController : MonoBehaviour
     {
-        EventManager.StartListening("PlayerShoot", PlayerShoot);
-    }
+        #region Fields
+        [SerializeField] private Transform _ShootPoint;
+        [SerializeField] private GameObject _bullet;
+        private AudioSource _audioSource;
 
-    private void OnDisable()
-    {
-        EventManager.StopListening("PlayerShoot", PlayerShoot);
-    }
+        private float _timeBetweenShots = 0.1f;
+        private float _shotCounter;
 
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
+        #endregion
 
-    private void Update()
-    {
-        if(_shotCounter > 0.0f)
+
+        #region UnityMethods
+
+        private void OnEnable()
         {
-            _shotCounter -= Time.deltaTime;
+            EventManager.StartListening("PlayerShoot", PlayerShoot);
         }
-    }
 
-    #endregion
-
-
-    #region Methods
-
-    private void PlayerShoot(EventParam eventParam)
-    {
-        if (_shotCounter <= 0.0f)
+        private void OnDisable()
         {
-            _audioSource.Play();
-            _shotCounter = _timeBetweenShots;
-            Instantiate(_bullet, _ShootPoint.position, _ShootPoint.rotation);
+            EventManager.StopListening("PlayerShoot", PlayerShoot);
         }
-    }
 
-    #endregion
+        private void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Update()
+        {
+            if (_shotCounter > 0.0f)
+            {
+                _shotCounter -= Time.deltaTime;
+            }
+        }
+
+        #endregion
+
+
+        #region Methods
+
+        private void PlayerShoot(EventParam eventParam)
+        {
+            if (_shotCounter <= 0.0f)
+            {
+                _audioSource.Play();
+                _shotCounter = _timeBetweenShots;
+                Instantiate(_bullet, _ShootPoint.position, _ShootPoint.rotation);
+            }
+        }
+
+        #endregion
+    }
 }

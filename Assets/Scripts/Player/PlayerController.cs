@@ -1,93 +1,95 @@
 ﻿using UnityEngine;
 
 
-public class PlayerController : MonoBehaviour
+namespace learn3d
 {
-    #region Fields
-
-    [SerializeField] private Camera _mainCamera;
-    private Rigidbody _myRigidbody;
-
-    private float _speedMove = 2.5f;
-    private float _heightJump = 5.0f;
-    private float rayLength;
-    private bool _playerOnGround = false;
-
-    #endregion
-
-
-    #region UnityMethods
-
-    private void Start()
+    public class PlayerController : MonoBehaviour
     {
-        _myRigidbody = GetComponent<Rigidbody>();
-    }
+        #region Fields
 
-    private void Update()
-    {
-        Movement();
-        Fire();
-    }
+        [SerializeField] private Camera _mainCamera;
+        private Rigidbody _myRigidbody;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
+        private float _speedMove = 2.5f;
+        private float _heightJump = 5.0f;
+        private float _rayLength;
+        private bool _playerOnGround = false;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void Start()
         {
-            _playerOnGround = true;
+            _myRigidbody = GetComponent<Rigidbody>();
         }
-    }
 
-    #endregion
-    
-
-    #region Methods
-
-    private void Movement()
-    {
-        if (_playerOnGround)
+        private void Update()
         {
+            Movement();
+            Fire();
+        }
 
-            Look();
-            Walk();
-
-            if (Input.GetKey(KeyCode.Space))
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Floor"))
             {
-                Jump();
+                _playerOnGround = true;
             }
         }
-    }
 
-    private void Fire()
-    {
-        if (Input.GetMouseButton(0))
+        #endregion
+
+
+        #region Methods
+
+        private void Movement()
         {
-            EventManager.TriggerEvent("PlayerShoot");
+            if (_playerOnGround)
+            {
+                Look();
+                Walk();
+
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    Jump();
+                }
+            }
         }
-    }
 
-    private void Walk()
-    {
-        float vectorX = Input.GetAxisRaw("Horizontal") * _speedMove;
-        float vectorZ = Input.GetAxisRaw("Vertical") * _speedMove;
-        _myRigidbody.velocity = new Vector3(vectorX, _myRigidbody.velocity.y, vectorZ);
-    }
-
-    private void Jump()
-    {
-        _myRigidbody.AddForce(new Vector3(0, _heightJump, 0), ForceMode.Impulse);
-        _playerOnGround = false;
-    }
-
-    private void Look()
-    {
-        var cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        var groundPlane = new Plane(Vector3.up, Vector3.zero);
-        if (groundPlane.Raycast(cameraRay, out rayLength))
+        private void Fire()
         {
-            var pointToLook = cameraRay.GetPoint(rayLength);
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            if (Input.GetMouseButton(0))
+            {
+                EventManager.TriggerEvent("PlayerShoot");
+            }
         }
-    }
 
-    #endregion
+        private void Walk()
+        {
+            float vectorX = Input.GetAxisRaw("Horizontal") * _speedMove;
+            float vectorZ = Input.GetAxisRaw("Vertical") * _speedMove;
+            _myRigidbody.velocity = new Vector3(vectorX, _myRigidbody.velocity.y, vectorZ);
+        }
+
+        private void Jump()
+        {
+            _myRigidbody.AddForce(new Vector3(0, _heightJump, 0) * _myRigidbody.mass, ForceMode.Impulse);
+            _playerOnGround = false;
+        }
+
+        private void Look()
+        {
+            var cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            var groundPlane = new Plane(Vector3.up, Vector3.zero);
+            if (groundPlane.Raycast(cameraRay, out _rayLength))
+            {
+                var pointToLook = cameraRay.GetPoint(_rayLength);
+                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            }
+        }
+
+        #endregion
+    }
 }

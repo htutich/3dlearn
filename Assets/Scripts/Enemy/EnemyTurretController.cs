@@ -2,54 +2,58 @@
 using UnityEngine;
 
 
-public class EnemyTurretController : MonoBehaviour
+namespace learn3d
 {
-    #region Fields
-
-    private GameObject _player;
-    private RaycastHit _raycastHit;
-    private Ray _ray;
-
-    private string _uniqueID;
-    private float _playerCheckArea = 5f;
-    private bool _hasPlayer = true;
-
-    #endregion
-
-    #region UnityMethods
-
-    private void Start()
+    public class EnemyTurretController : MonoBehaviour
     {
-        _uniqueID = Guid.NewGuid().ToString();
-        var EnemyTurretShootController = gameObject.GetComponentInChildren<EnemyTurretShootController>();
-            EnemyTurretShootController.UniqueID = _uniqueID;
-        _player = FindObjectOfType<PlayerController>().gameObject;
-    }
+        #region Fields
 
-    private void Update()
-    {
-        if (_hasPlayer)
+        private GameObject _player;
+        private RaycastHit _raycastHit;
+        private Ray _ray;
+
+        private string _uniqueID;
+        private float _playerCheckArea = 5f;
+        private bool _hasPlayer = true;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void Start()
         {
-            var distancePlayerCheck = (_player.transform.position - transform.position).sqrMagnitude;
-            if (distancePlayerCheck < _playerCheckArea * _playerCheckArea)
+            _uniqueID = Guid.NewGuid().ToString();
+            var EnemyTurretShootController = gameObject.GetComponentInChildren<EnemyTurretShootController>();
+                EnemyTurretShootController.UniqueID = _uniqueID;
+            _player = FindObjectOfType<PlayerAnimationMovement>()?.gameObject;
+        }
+
+        private void Update()
+        {
+            if (_hasPlayer)
             {
-                transform.LookAt(_player.transform.position);
-                Debug.DrawLine(transform.position, _player.transform.position, Color.blue);
-
-                var startRaycastPosition = transform.position;
-                var playerPosition = _player.transform.position - startRaycastPosition;
-                var rayCast = Physics.Raycast(startRaycastPosition, playerPosition, out _raycastHit, playerPosition.magnitude, ~ (1 << LayerMask.GetMask("Player")));
-                
-                if (rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
+                var distancePlayerCheck = (_player.transform.position - transform.position).sqrMagnitude;
+                if (distancePlayerCheck < _playerCheckArea * _playerCheckArea)
                 {
-                    EventParam currentParams = new EventParam();
-                    currentParams.uniqueID = _uniqueID;
+                    transform.LookAt(_player.transform.position);
+                    Debug.DrawLine(transform.position, _player.transform.position, Color.blue);
 
-                    EventManager.TriggerEvent("TurretShoot", currentParams);
+                    var startRaycastPosition = transform.position;
+                    var playerPosition = _player.transform.position - startRaycastPosition;
+                    var rayCast = Physics.Raycast(startRaycastPosition, new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z), out _raycastHit, playerPosition.magnitude, ~ (1 << LayerMask.GetMask("Player")));
+                
+                    if (rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
+                    {
+                        EventParam currentParams = new EventParam();
+                        currentParams.uniqueID = _uniqueID;
+
+                        EventManager.TriggerEvent("TurretShoot", currentParams);
+                    }
                 }
             }
         }
-    }
 
-    #endregion
+        #endregion
+    }
 }

@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartRoom10x10
       objectReference: {fileID: 0}
+    - target: {fileID: 1372923698531488031, guid: 1c6d348532ba7cc4aabeae2f44c48d5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c3514c5532c39fb45866a619c1502bb7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c6d348532ba7cc4aabeae2f44c48d5a, type: 3}
 --- !u!114 &1405991577 stripped

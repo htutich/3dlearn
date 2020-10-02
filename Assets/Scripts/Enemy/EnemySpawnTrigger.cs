@@ -1,35 +1,38 @@
 ﻿using UnityEngine;
 
 
-public class EnemySpawnTrigger : MonoBehaviour
+namespace learn3d
 {
-    #region Fields
-
-    [SerializeField] private Transform _enemySpawnPoint;
-    [SerializeField] private GameObject _enemy;
-
-    private float _minSpawnRadius = -3.0f;
-    private float _maxSpawnRadius = 3.0f;
-    private int _maxEnemyCount = 10;
-
-    #endregion
-
-
-    #region UnityMethods
-
-    private void OnTriggerStay(Collider other)
+    public class EnemySpawnTrigger : MonoBehaviour
     {
-        if (other.gameObject.CompareTag("Player"))
+        #region Fields
+
+        [SerializeField] private Transform _enemySpawnPoint;
+        [SerializeField] private GameObject _enemy;
+
+        private float _minSpawnRadius = -3.0f;
+        private float _maxSpawnRadius = 3.0f;
+        private int _maxEnemyCount = 10;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void OnTriggerStay(Collider other)
         {
-            if (_maxEnemyCount > 0)
+            if (other.gameObject.CompareTag("Player"))
             {
-                _maxEnemyCount--;
-                var random = Random.Range(_minSpawnRadius, _maxSpawnRadius);
-                var spawnPosition = new Vector3(_enemySpawnPoint.transform.position.x + random, _enemySpawnPoint.transform.position.y, _enemySpawnPoint.transform.position.z + random);
-                Instantiate(_enemy, spawnPosition, _enemySpawnPoint.rotation);
+                if (_maxEnemyCount > 0)
+                {
+                    _maxEnemyCount--;
+                    var random = Random.Range(_minSpawnRadius, _maxSpawnRadius);
+                    var spawnPosition = new Vector3(_enemySpawnPoint.transform.position.x + random, _enemySpawnPoint.transform.position.y, _enemySpawnPoint.transform.position.z + random);
+                    Instantiate(_enemy, spawnPosition, _enemySpawnPoint.rotation);
+                }
             }
         }
-    }
 
-    #endregion
+        #endregion
+    }
 }
