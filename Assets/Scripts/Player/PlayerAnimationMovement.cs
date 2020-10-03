@@ -16,7 +16,9 @@ namespace learn3d
         private BoxCollider _myBoxCollider;
         private RaycastHit _raycastGroundHit;
         private Vector3 _movementVector;
+        private Vector3 _lookVector;
 
+        private float _heightJump = 0.4f;
         private float _rayLength;
         private bool _hasWeapon = false;
 
@@ -71,9 +73,9 @@ namespace learn3d
 
         void OnAnimatorMove()
         {
-            _myRigidbody.MovePosition(_myRigidbody.position + _movementVector * _myAnimator.deltaPosition.magnitude);
-
+            _myRigidbody.MovePosition(_myRigidbody.position + transform.TransformDirection(_movementVector) * _myAnimator.deltaPosition.magnitude);
         }
+
         #endregion
 
 
@@ -90,13 +92,14 @@ namespace learn3d
                     if (_hasWeapon)
                     {
                         _myAnimator.Play("Running Jump With Weapon");
-                        _myRigidbody.MovePosition(_myRigidbody.position + new Vector3(0.0f, 0.1f, 0.0f) + _movementVector * _myAnimator.deltaPosition.magnitude);
+                        //_myRigidbody.MovePosition(_myRigidbody.position + new Vector3(0.0f, 0.2f, 0.0f) + _movementVector * _myAnimator.deltaPosition.magnitude);
                     }
                     else
                     {
                         _myAnimator.Play("Running Jump");
-                        _myRigidbody.MovePosition(_myRigidbody.position + new Vector3(0.0f, 0.25f, 0.0f) + _movementVector * _myAnimator.deltaPosition.magnitude);
+                        //_myRigidbody.MovePosition(_myRigidbody.position + new Vector3(0.0f, 0.25f, 0.0f) + _movementVector * _myAnimator.deltaPosition.magnitude);
                     }
+                    _myRigidbody.AddForce(new Vector3(0, _heightJump, 0) * _myRigidbody.mass, ForceMode.Impulse);
                 }
             }
         }
@@ -107,16 +110,18 @@ namespace learn3d
             {
                 EventManager.TriggerEvent("PlayerShoot");
             }
+
+            if (Input.GetMouseButton(1))
+            {
+                EventManager.TriggerEvent("PlayerBomb");
+            }
         }
 
         private void Walk()
         {
-            float vectorX = Input.GetAxisRaw("Horizontal");
-            float vectorZ = Input.GetAxisRaw("Vertical");
-
-            _myAnimator.SetFloat("Forward", vectorX);
-            _myAnimator.SetFloat("Turn", vectorZ);
-            _movementVector = new Vector3(vectorX, _myRigidbody.position.y, vectorZ);
+            _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
+            _myAnimator.SetFloat("Forward", _movementVector.x);
+            _myAnimator.SetFloat("Turn", _movementVector.z);
         }
 
         private void Look()
@@ -126,7 +131,8 @@ namespace learn3d
             if (groundPlane.Raycast(cameraRay, out _rayLength))
             {
                 var pointToLook = cameraRay.GetPoint(_rayLength);
-                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+                _lookVector = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
+                transform.LookAt(_lookVector);
             }
         }
 

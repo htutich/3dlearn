@@ -7,10 +7,13 @@ namespace learn3d
         #region Fields
         [SerializeField] private Transform _ShootPoint;
         [SerializeField] private GameObject _bullet;
+        [SerializeField] private GameObject _bomb;
         private AudioSource _audioSource;
 
         private float _timeBetweenShots = 0.1f;
-        private float _shotCounter;
+        private float _timeBetweenBombs = 2.5f;
+        private float _shotTimer;
+        private float _bombTimer;
 
         #endregion
 
@@ -20,11 +23,13 @@ namespace learn3d
         private void OnEnable()
         {
             EventManager.StartListening("PlayerShoot", PlayerShoot);
+            EventManager.StartListening("PlayerBomb", PlayerBomb);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening("PlayerShoot", PlayerShoot);
+            EventManager.StopListening("PlayerBomb", PlayerBomb);
         }
 
         private void Start()
@@ -34,9 +39,14 @@ namespace learn3d
 
         private void Update()
         {
-            if (_shotCounter > 0.0f)
+            if (_shotTimer > 0.0f)
             {
-                _shotCounter -= Time.deltaTime;
+                _shotTimer -= Time.deltaTime;
+            }
+
+            if (_bombTimer > 0.0f)
+            {
+                _bombTimer -= Time.deltaTime;
             }
         }
 
@@ -47,11 +57,21 @@ namespace learn3d
 
         private void PlayerShoot(EventParam eventParam)
         {
-            if (_shotCounter <= 0.0f)
+            if (_shotTimer <= 0.0f)
             {
                 _audioSource.Play();
-                _shotCounter = _timeBetweenShots;
+                _shotTimer = _timeBetweenShots;
                 Instantiate(_bullet, _ShootPoint.position, _ShootPoint.rotation);
+            }
+        }
+
+        private void PlayerBomb(EventParam eventParam)
+        {
+            if (_bombTimer <= 0.0f)
+            {
+                _audioSource.Play();
+                _bombTimer = _timeBetweenBombs;
+                Instantiate(_bomb, _ShootPoint.position, _ShootPoint.rotation);
             }
         }
 

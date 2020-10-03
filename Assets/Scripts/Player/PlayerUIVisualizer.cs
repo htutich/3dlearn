@@ -29,7 +29,6 @@ namespace learn3d
         private void Start()
         {
             _canvas.SetActive(true);
-            Cursor.visible = false;
         }
 
         #endregion

@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ShootPoint: {fileID: 7270595052084842519}
   _bullet: {fileID: 2028124031258311074, guid: cc56dda50b87bfa4aadf4f86cbcb9027, type: 3}
+  _bomb: {fileID: 5636007308817717295, guid: ff7e7c6e7e73e154a8231434575e4d7e, type: 3}
 --- !u!82 &3941806826709166405
 AudioSource:
   m_ObjectHideFlags: 0
