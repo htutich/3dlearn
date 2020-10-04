@@ -92,12 +92,10 @@ namespace learn3d
                     if (_hasWeapon)
                     {
                         _myAnimator.Play("Running Jump With Weapon");
-                        //_myRigidbody.MovePosition(_myRigidbody.position + new Vector3(0.0f, 0.2f, 0.0f) + _movementVector * _myAnimator.deltaPosition.magnitude);
                     }
                     else
                     {
                         _myAnimator.Play("Running Jump");
-                        //_myRigidbody.MovePosition(_myRigidbody.position + new Vector3(0.0f, 0.25f, 0.0f) + _movementVector * _myAnimator.deltaPosition.magnitude);
                     }
                     _myRigidbody.AddForce(new Vector3(0, _heightJump, 0) * _myRigidbody.mass, ForceMode.Impulse);
                 }

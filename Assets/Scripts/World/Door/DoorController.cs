@@ -6,7 +6,6 @@ public class DoorController : MonoBehaviour
     #region Fields
 
     [SerializeField] private GameObject _door;
-    private float _doorOpenHeight = 2.0f;
     private bool _canPlayerOpenDoor = true;
 
     #endregion

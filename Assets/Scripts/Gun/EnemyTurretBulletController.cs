@@ -7,8 +7,8 @@ namespace learn3d
         #region Fields
 
         private Rigidbody _myRigidbody;
-        private float _speed = 15.0f;
-        private float _lifeTime = 1.5f;
+        private float _speed = 20.0f;
+        private float _lifeTime = 2.0f;
         private float _minDamage = 10.0f;
         private float _maxDamage = 40.0f;
         private float _damageToGive;
@@ -28,11 +28,11 @@ namespace learn3d
 
         private void OnCollisionEnter(Collision other)
         {
-            var PlayerHealthManager = other.gameObject.GetComponent<PlayerHealthManager>();
-            PlayerHealthManager?.HurtPlayer(_damageToGive);
+            var playerHealthManager = other.gameObject.GetComponent<PlayerHealthManager>();
+            playerHealthManager?.HurtPlayer(_damageToGive);
 
-            var DoorHealthManager = other.gameObject.GetComponent<DoorHealthManager>();
-            DoorHealthManager?.HurtEnemy(_damageToGive);
+            var dorHealthManager = other.gameObject.GetComponent<DoorHealthManager>();
+            dorHealthManager?.HurtEnemy(_damageToGive);
 
             Destroy(gameObject);
         }

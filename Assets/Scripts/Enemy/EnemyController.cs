@@ -36,7 +36,7 @@ namespace learn3d
             _startPoint = transform.position;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (transform.position.y < 0.0f)
             {
@@ -61,27 +61,30 @@ namespace learn3d
 
         private void GoToSpawnPoint()
         {
-            var distanceToSpawnPoint = (_startPoint - transform.position).sqrMagnitude;
-            if (distanceToSpawnPoint <= 0.1f)
-            {
-                _isWallkToSpawnPoint = false;
-                _timeToSpawnReturn = 2.0f;
-            }
-            else
+            if (_isWallkToSpawnPoint)
             {
                 transform.LookAt(_startPoint);
 
-                var vectorX = _startPoint.x - transform.position.x;
-                var vectorZ = _startPoint.z - transform.position.z;
-                var vectorMove = new Vector3(vectorX, 0.0f, vectorZ);
-                vectorMove.Normalize();
-                _myRigidbody.velocity = vectorMove * _speedMove;
+                var distanceToSpawnPoint = (_startPoint - transform.position).sqrMagnitude;
+                if (distanceToSpawnPoint <= 0.1f)
+                {
+                    _isWallkToSpawnPoint = false;
+                    _timeToSpawnReturn = 2.0f;
+                }
+                else
+                {
+                    var vectorX = _startPoint.x - transform.position.x;
+                    var vectorZ = _startPoint.z - transform.position.z;
+                    var vectorMove = new Vector3(vectorX, 0.0f, vectorZ);
+                    vectorMove.Normalize();
+                    _myRigidbody.velocity = vectorMove * _speedMove;
+                }
             }
         }
 
         private void AttackPlayer(float distanceToPlayer, bool rayCast)
         {
-            if (distanceToPlayer < _playerAttackArea * _playerAttackArea && rayCast && !_raycastHit.collider.gameObject.CompareTag("Player"))
+            if ((distanceToPlayer < _playerAttackArea * _playerAttackArea) && (rayCast && _raycastHit.collider.gameObject.CompareTag("Player")))
             {
                 if (_attackTimer > 0.0f)
                 {
@@ -99,19 +102,23 @@ namespace learn3d
 
         private void MoveToPlayer(float distanceToPlayer, bool rayCast)
         {
-            if (distanceToPlayer < _playerCheckArea * _playerCheckArea && rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
+            if (distanceToPlayer < _playerCheckArea * _playerCheckArea)
             {
                 transform.LookAt(new Vector3(_player.transform.position.x, _player.transform.position.y + 0.5f, _player.transform.position.z));
 
-                var vectorX = _player.transform.position.x - transform.position.x;
-                var vectorZ = _player.transform.position.z - transform.position.z;
-                var vectorMove = new Vector3(vectorX, transform.position.y, vectorZ);
-                vectorMove.Normalize();
-                _myRigidbody.velocity = vectorMove * _speedMove;
+                if (rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
+                {
+                    var vectorX = _player.transform.position.x - transform.position.x;
+                    var vectorZ = _player.transform.position.z - transform.position.z;
+                    var vectorMove = new Vector3(vectorX, 0.0f, vectorZ);
+                    vectorMove.Normalize();
+                    _myRigidbody.velocity = vectorMove * _speedMove;
+                }
             }
 
             if ((distanceToPlayer > _playerCheckArea * _playerCheckArea) || (rayCast && !_raycastHit.collider.gameObject.CompareTag("Player")))
             {
+                _isWallkToSpawnPoint = true;
                 Invoke(nameof(GoToSpawnPoint), 2);
             }
         }

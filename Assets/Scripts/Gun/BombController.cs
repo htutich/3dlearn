@@ -39,20 +39,10 @@ namespace learn3d
             }
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
-            var EnemyHealthManager = other.gameObject.GetComponent<EnemyHealthManager>();
-            EnemyHealthManager?.HurtEnemy(_damage);
-
-            var DoorHealthManager = other.gameObject.GetComponent<DoorHealthManager>();
-            DoorHealthManager?.HurtEnemy(_damage);
-        }
-
         #endregion
 
 
         #region Methods
-
 
         private void Detonate()
         {
@@ -66,8 +56,12 @@ namespace learn3d
                 {
                     var enemyGameObject = collider.gameObject;
                     var enemyRigidBody = enemyGameObject?.GetComponent<Rigidbody>();
-                    var enemyHealthManager = enemyGameObject?.GetComponent<EnemyHealthManager>();
+
+                    var enemyHealthManager = enemyGameObject.GetComponent<EnemyHealthManager>();
                     enemyHealthManager?.HurtEnemy(_damage);
+
+                    var doorHealthManager = enemyGameObject.GetComponent<DoorHealthManager>();
+                    doorHealthManager?.HurtEnemy(_damage);
 
                     var direction = enemyGameObject.transform.position - transform.position;
                     direction.Normalize();
@@ -76,9 +70,9 @@ namespace learn3d
                     {
                         enemyRigidBody.AddForce(direction * _forceExplosion * enemyRigidBody.mass, ForceMode.Impulse);
                     }
-                    Destroy(gameObject);
                 }
             }
+            Destroy(gameObject);
         }
 
         #endregion

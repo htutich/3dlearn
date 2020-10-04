@@ -9,8 +9,6 @@ namespace learn3d
         #region Fields
 
         [SerializeField] private GameObject _firstAidKit;
-        [SerializeField] private GameObject _canvas;
-        [SerializeField] private Slider _slider;
         private AudioSource _audioSource;
 
         private float _health = 100.0f;
@@ -23,21 +21,8 @@ namespace learn3d
 
         private void Start()
         {
-            _canvas.SetActive(true);
             _audioSource = GetComponent<AudioSource>();
-
             _currentHealth = _health;
-            _slider.value = CalculateHealth();
-        }
-
-        private void Update()
-        {
-            if (_currentHealth <= 0)
-            {
-                Instantiate(_firstAidKit, new Vector3(transform.position.x, 0.0f, transform.position.z), transform.rotation);
-                EventManager.TriggerEvent("EnemyDie");
-                Destroy(gameObject);
-            }
         }
 
         #endregion
@@ -50,7 +35,13 @@ namespace learn3d
             _audioSource.Play();
 
             _currentHealth -= damage;
-            _slider.value = CalculateHealth();
+
+            if (_currentHealth <= 0)
+            {
+                Instantiate(_firstAidKit, new Vector3(transform.position.x, 0.0f, transform.position.z), transform.rotation);
+                EventManager.TriggerEvent("EnemyDie");
+                Destroy(gameObject);
+            }
         }
 
         private float CalculateHealth()

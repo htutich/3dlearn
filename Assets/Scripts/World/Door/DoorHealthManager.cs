@@ -27,14 +27,6 @@ public class DoorHealthManager : MonoBehaviour
         _slider.value = CalculateHealth();
     }
 
-    private void Update()
-    {
-        if (_currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     #endregion
 
 
@@ -45,6 +37,11 @@ public class DoorHealthManager : MonoBehaviour
         _audioSource.Play();
         _currentHealth -= damage;
         _slider.value = CalculateHealth();
+
+        if (_currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private float CalculateHealth()

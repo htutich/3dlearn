@@ -27,13 +27,16 @@ namespace learn3d
             Destroy(gameObject, _lifeTime);
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision enemy)
         {
-            var EnemyHealthManager = other.gameObject.GetComponent<EnemyHealthManager>();
-            EnemyHealthManager?.HurtEnemy(_damageToGive);
+            if (enemy.gameObject.CompareTag("Enemy"))
+            {
+                var enemyHealthManager = enemy.gameObject.GetComponent<EnemyHealthManager>();
+                enemyHealthManager?.HurtEnemy(_damageToGive);
 
-            var DoorHealthManager = other.gameObject.GetComponent<DoorHealthManager>();
-            DoorHealthManager?.HurtEnemy(_damageToGive);
+                var doorHealthManager = enemy.gameObject.GetComponent<DoorHealthManager>();
+                doorHealthManager?.HurtEnemy(_damageToGive);
+            }
 
             Destroy(gameObject);
         }
