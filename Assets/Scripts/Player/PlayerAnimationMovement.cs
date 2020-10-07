@@ -73,7 +73,8 @@ namespace learn3d
 
         void OnAnimatorMove()
         {
-            _myRigidbody.MovePosition(_myRigidbody.position + transform.TransformDirection(_movementVector) * _myAnimator.deltaPosition.magnitude);
+            Debug.Log(_movementVector);
+            _myRigidbody.MovePosition(_myRigidbody.position + _movementVector * Time.deltaTime * 2.5f);
         }
 
         #endregion
@@ -118,8 +119,10 @@ namespace learn3d
         private void Walk()
         {
             _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
-            _myAnimator.SetFloat("Forward", _movementVector.x);
-            _myAnimator.SetFloat("Turn", _movementVector.z);
+            var vector = transform.TransformDirection(_movementVector);
+
+            _myAnimator.SetFloat("Forward", vector.x);
+            _myAnimator.SetFloat("Turn", vector.z);
         }
 
         private void Look()
