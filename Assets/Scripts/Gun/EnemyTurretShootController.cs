@@ -14,7 +14,7 @@ namespace learn3d
 
         private string _uniqueID;
         private float _timeBetweenShots = 0.2f;
-        private float _timeBetweenCanonShots = 0.1f;
+        private float _timeBetweenCanonShots = 0.05f;
         private float _firstShotCounter = 0.0f;
         private float _secondShotCounter = 0.0f;
 

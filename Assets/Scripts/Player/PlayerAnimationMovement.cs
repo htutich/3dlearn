@@ -10,6 +10,8 @@ namespace learn3d
         [SerializeField] private LayerMask _floorMask;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private GameObject _myWeaponHand;
+        [SerializeField] private bool _hasWeapon = false;
+        [SerializeField] private bool _isMenu = false;
 
         private Rigidbody _myRigidbody;
         private Animator _myAnimator;
@@ -20,7 +22,6 @@ namespace learn3d
 
         private float _heightJump = 0.4f;
         private float _rayLength;
-        private bool _hasWeapon = false;
 
         #endregion
 
@@ -64,16 +65,17 @@ namespace learn3d
             {
                 Fire();
             }
+            Jump();
         }
 
         private void FixedUpdate()
         {
-            Movement();
+            Walk();
+            Look();
         }
 
         void OnAnimatorMove()
         {
-            Debug.Log(_movementVector);
             _myRigidbody.MovePosition(_myRigidbody.position + _movementVector * Time.deltaTime * 2.5f);
         }
 
@@ -82,13 +84,54 @@ namespace learn3d
 
         #region Methods
 
-        private void Movement()
+        private void Fire()
         {
-            Walk();
-            Look();
-            if (IsGrounded())
+            if (!_isMenu)
             {
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetMouseButton(0))
+                {
+                    EventManager.TriggerEvent("PlayerShoot");
+                }
+
+                if (Input.GetMouseButton(1))
+                {
+                    EventManager.TriggerEvent("PlayerBomb");
+                }
+            }
+        }
+
+        private void Walk()
+        {
+            if (!_isMenu)
+            {
+                _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
+                var vector = transform.TransformDirection(_movementVector);
+
+                _myAnimator.SetFloat("Forward", vector.x);
+                _myAnimator.SetFloat("Turn", vector.z);
+            }
+        }
+
+        private void Look()
+        {
+            if (!_isMenu)
+            {
+                var cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                var groundPlane = new Plane(Vector3.up, Vector3.zero);
+                if (groundPlane.Raycast(cameraRay, out _rayLength))
+                {
+                    var pointToLook = cameraRay.GetPoint(_rayLength);
+                    _lookVector = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
+                    transform.LookAt(_lookVector);
+                }
+            }
+        }
+
+        private void Jump()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (IsGrounded())
                 {
                     if (_hasWeapon)
                     {
@@ -100,40 +143,6 @@ namespace learn3d
                     }
                     _myRigidbody.AddForce(new Vector3(0, _heightJump, 0) * _myRigidbody.mass, ForceMode.Impulse);
                 }
-            }
-        }
-
-        private void Fire()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                EventManager.TriggerEvent("PlayerShoot");
-            }
-
-            if (Input.GetMouseButton(1))
-            {
-                EventManager.TriggerEvent("PlayerBomb");
-            }
-        }
-
-        private void Walk()
-        {
-            _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
-            var vector = transform.TransformDirection(_movementVector);
-
-            _myAnimator.SetFloat("Forward", vector.x);
-            _myAnimator.SetFloat("Turn", vector.z);
-        }
-
-        private void Look()
-        {
-            var cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            var groundPlane = new Plane(Vector3.up, Vector3.zero);
-            if (groundPlane.Raycast(cameraRay, out _rayLength))
-            {
-                var pointToLook = cameraRay.GetPoint(_rayLength);
-                _lookVector = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
-                transform.LookAt(_lookVector);
             }
         }
 

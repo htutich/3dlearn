@@ -13,7 +13,7 @@ namespace learn3d
         private Ray _ray;
 
         private string _uniqueID;
-        private float _playerCheckArea = 5f;
+        private float _playerCheckArea = 7.0f;
         private bool _hasPlayer = true;
 
         #endregion
