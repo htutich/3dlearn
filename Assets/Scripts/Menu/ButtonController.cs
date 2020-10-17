@@ -4,12 +4,10 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
     #region Fields
 
-    [SerializeField] private Button _myButton;
-    [SerializeField] private Text _myButtonText;
-
+    private Button _myButton;
+    private Text _myButtonText;
     private Color _buttonDefaultColor;
 
     #endregion

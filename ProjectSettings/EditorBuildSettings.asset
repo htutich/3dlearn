@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 29bcfddb14b2f7342a83459c8411c55d
   - enabled: 1
-    path: Assets/Scenes/RoomPlacerTest.unity
+    path: Assets/Scenes/Dungeon.unity
     guid: 286d5993efb723f4591592a6fafcd30d
+  - enabled: 1
+    path: Assets/Scenes/Poligon.unity
+    guid: 8f319ba661c8d7d41859da2c9597f960
   m_configObjects: {}

@@ -135,7 +135,8 @@ AudioSource:
   m_GameObject: {fileID: 7640076664356512403}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2094890811916241933, guid: f216b6a0b13662049a2a46e802fc373f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: b0732771838bbfe4a8491f5fc4bf7203, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -236,3 +237,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ShootPoint: {fileID: 833090642093370784}
   _bullet: {fileID: 2028124031258311074, guid: cc56dda50b87bfa4aadf4f86cbcb9027, type: 3}
+  _bomb: {fileID: 0}

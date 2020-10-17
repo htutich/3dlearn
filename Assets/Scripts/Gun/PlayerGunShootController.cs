@@ -10,8 +10,8 @@ namespace learn3d
         [SerializeField] private GameObject _bomb;
         private AudioSource _audioSource;
 
-        private float _timeBetweenShots = 0.1f;
-        private float _timeBetweenBombs = 2.5f;
+        private float _timeBetweenShots = 0.05f;
+        private float _timeBetweenBombs = 1.5f;
         private float _shotTimer;
         private float _bombTimer;
 

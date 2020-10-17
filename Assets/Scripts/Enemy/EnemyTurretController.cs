@@ -8,12 +8,14 @@ namespace learn3d
     {
         #region Fields
 
+        [SerializeField] private LayerMask _checkLayerMask;
+
         private GameObject _player;
         private RaycastHit _raycastHit;
         private Ray _ray;
 
         private string _uniqueID;
-        private float _playerCheckArea = 7.0f;
+        private float _playerCheckArea = 10.0f;
         private bool _hasPlayer = true;
 
         #endregion
@@ -36,13 +38,16 @@ namespace learn3d
                 var distancePlayerCheck = (_player.transform.position - transform.position).sqrMagnitude;
                 if (distancePlayerCheck < _playerCheckArea * _playerCheckArea)
                 {
-                    transform.LookAt(_player.transform.position);
+                    var lookAtPlayer = _player.transform.position;
+                    lookAtPlayer.y += 0.5f;
+                    transform.LookAt(lookAtPlayer);
                     Debug.DrawLine(transform.position, _player.transform.position, Color.blue);
 
                     var startRaycastPosition = transform.position;
                     var playerPosition = _player.transform.position - startRaycastPosition;
-                    var rayCast = Physics.Raycast(startRaycastPosition, new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z), out _raycastHit, playerPosition.magnitude, ~ (1 << LayerMask.GetMask("Player")));
-                
+                    var vectorPlayerPosition = new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z);
+                    var rayCast = Physics.Raycast(startRaycastPosition, vectorPlayerPosition, out _raycastHit, playerPosition.magnitude, _checkLayerMask);
+
                     if (rayCast && _raycastHit.collider.gameObject.CompareTag("Player"))
                     {
                         EventParam currentParams = new EventParam();

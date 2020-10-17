@@ -8,10 +8,10 @@ namespace learn3d
         #region Fields
 
         private Rigidbody _myRigidbody;
-        private float _speed = 20.0f;
-        private float _lifeTime = 2.0f;
+        private float _speed = 40.0f;
+        private float _lifeTime = 5.0f;
         private int _minDamage = 10;
-        private int _maxDamage = 20;
+        private int _maxDamage = 40;
         private int _damageToGive;
 
         #endregion

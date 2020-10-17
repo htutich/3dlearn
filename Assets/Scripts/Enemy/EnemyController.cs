@@ -7,6 +7,8 @@ namespace learn3d
     {
         #region Fields
 
+        [SerializeField] private LayerMask _checkLayerMask;
+
         private Rigidbody _myRigidbody;
         private GameObject _player;
         private Vector3 _startPoint;
@@ -42,16 +44,20 @@ namespace learn3d
             {
                 Destroy(gameObject);
             }
-
-            var startRaycastPosition = transform.position;
-            var playerPosition = _player.transform.position - startRaycastPosition;
-            var rayCast = Physics.Raycast(startRaycastPosition, new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z), out _raycastHit, playerPosition.magnitude, ~(1 << LayerMask.GetMask("Player")));
-            Debug.DrawLine(transform.position, _player.transform.position, Color.blue);
-            
             var distanceToPlayer = (_player.transform.position - transform.position).sqrMagnitude;
 
-            MoveToPlayer(distanceToPlayer, rayCast);
-            AttackPlayer(distanceToPlayer, rayCast);
+            if (distanceToPlayer < _playerCheckArea * _playerCheckArea)
+            {
+                var startRaycastPosition = transform.position;
+                var playerPosition = _player.transform.position - startRaycastPosition;
+                var vectorPlayerPosition = new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z);
+                var rayCast = Physics.Raycast(startRaycastPosition, vectorPlayerPosition, out _raycastHit, playerPosition.magnitude, _checkLayerMask);
+
+                MoveToPlayer(distanceToPlayer, rayCast);
+                AttackPlayer(distanceToPlayer, rayCast);
+            }
+
+
         }
 
         #endregion

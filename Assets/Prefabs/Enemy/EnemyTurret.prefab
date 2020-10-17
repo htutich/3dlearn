@@ -205,8 +205,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.9, z: 0.55}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 0.50913525, y: 0.9, z: 0.40809155}
+  m_Center: {x: -0.0011519492, y: 0.5, z: -0.0014621317}
 --- !u!82 &-173327617084808749
 AudioSource:
   m_ObjectHideFlags: 0
@@ -216,7 +216,8 @@ AudioSource:
   m_GameObject: {fileID: 5497790480030193093}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2094890811916241933, guid: f216b6a0b13662049a2a46e802fc373f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9fbe8a08fc1b702499ea67648c60240a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -317,8 +318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firstAidKit: {fileID: 2132538228680051711, guid: 318db950715c41048ba54c54b496b17c,
     type: 3}
-  _canvas: {fileID: 0}
-  _slider: {fileID: 0}
 --- !u!1 &8711504543020524065
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2578a9d9d21c8409439d0c1ccedd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkLayerMask:
+    serializedVersion: 2
+    m_Bits: 2147484160
 --- !u!1001 &8403679199467506799
 PrefabInstance:
   m_ObjectHideFlags: 0

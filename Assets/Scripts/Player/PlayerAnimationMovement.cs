@@ -20,7 +20,8 @@ namespace learn3d
         private Vector3 _movementVector;
         private Vector3 _lookVector;
 
-        private float _heightJump = 0.4f;
+        private float _heightJump = 1.0f;
+        private float _movementSpeedMultipie = 3.5f;
         private float _rayLength;
 
         #endregion
@@ -76,7 +77,7 @@ namespace learn3d
 
         void OnAnimatorMove()
         {
-            _myRigidbody.MovePosition(_myRigidbody.position + _movementVector * Time.deltaTime * 2.5f);
+            _myRigidbody.MovePosition(_myRigidbody.position + _movementVector * _movementSpeedMultipie * Time.deltaTime);
         }
 
         #endregion
@@ -108,7 +109,7 @@ namespace learn3d
                 var vector = transform.TransformDirection(_movementVector);
 
                 _myAnimator.SetFloat("Forward", vector.x);
-                _myAnimator.SetFloat("Turn", vector.z);
+                _myAnimator.SetFloat("Turn", vector.z * -1.0f);
             }
         }
 
@@ -123,6 +124,9 @@ namespace learn3d
                     var pointToLook = cameraRay.GetPoint(_rayLength);
                     _lookVector = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
                     transform.LookAt(_lookVector);
+
+                    Debug.DrawLine(transform.position, _lookVector, Color.blue);
+
                 }
             }
         }
@@ -141,7 +145,7 @@ namespace learn3d
                     {
                         _myAnimator.Play("Running Jump");
                     }
-                    _myRigidbody.AddForce(new Vector3(0, _heightJump, 0) * _myRigidbody.mass, ForceMode.Impulse);
+                    _myRigidbody.AddForce(new Vector3(0, _heightJump, 0), ForceMode.Impulse);
                 }
             }
         }

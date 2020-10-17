@@ -495,7 +495,8 @@ AudioSource:
   m_GameObject: {fileID: 7349947538137811009}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2094890811916241933, guid: f216b6a0b13662049a2a46e802fc373f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9fbe8a08fc1b702499ea67648c60240a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -593,8 +594,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.8, z: 0.2}
-  m_Center: {x: 0, y: 0, z: -0.05}
+  m_Size: {x: 2.1437533, y: 1.8708849, z: 0.3086228}
+  m_Center: {x: -0.011889815, y: 0.0064889193, z: -0.043639585}
 --- !u!114 &-3048360278756954116
 MonoBehaviour:
   m_ObjectHideFlags: 0
