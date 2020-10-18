@@ -9,6 +9,7 @@ namespace learn3d
         #region Fields
 
         [SerializeField] private Slider _slider;
+        [SerializeField] private AudioClip _hitMusic;
         private AudioSource _audioSource;
 
         private float _health = 1000.0f;
@@ -63,6 +64,7 @@ namespace learn3d
 
         public void HurtPlayer(float damage)
         {
+            _audioSource.clip = _hitMusic;
             _audioSource.Play();
 
             _currentHealth -= damage;

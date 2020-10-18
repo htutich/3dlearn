@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5951681632124951233}
   m_LocalRotation: {x: 0.5345193, y: -0.02089839, z: -0.0124233, w: 0.84480655}
-  m_LocalPosition: {x: 0.48591226, y: 9.026115, z: -4.034047}
+  m_LocalPosition: {x: 0.4859123, y: 9.026115, z: -4.034047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5951681632744836642}
@@ -293,7 +293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5951681632826071355}
   m_LocalRotation: {x: 0.5345193, y: -0.02089839, z: -0.0124233, w: 0.84480655}
-  m_LocalPosition: {x: 0.48591226, y: 9.026115, z: -4.034047}
+  m_LocalPosition: {x: 0.4859123, y: 9.026115, z: -4.034047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5951681631343985135}
@@ -2137,6 +2137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 0}
+  _hitMusic: {fileID: 8300000, guid: 9fbe8a08fc1b702499ea67648c60240a, type: 3}
 --- !u!114 &32522343739953874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2168,6 +2169,7 @@ MonoBehaviour:
     m_Bits: 2147483649
   _mainCamera: {fileID: 5951681632124951237}
   _myWeaponHand: {fileID: 751794386141746688}
+  _stepMusic: {fileID: 8300000, guid: bcbef33226fec1b4c87b79fd70596c1b, type: 3}
   _hasWeapon: 0
   _isMenu: 0
 --- !u!54 &1338109364669109596
@@ -2210,7 +2212,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2094890811916241933, guid: f216b6a0b13662049a2a46e802fc373f,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9fbe8a08fc1b702499ea67648c60240a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2256,7 +2258,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

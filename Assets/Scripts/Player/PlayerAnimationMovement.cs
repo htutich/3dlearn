@@ -10,12 +10,14 @@ namespace learn3d
         [SerializeField] private LayerMask _floorMask;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private GameObject _myWeaponHand;
+        [SerializeField] private AudioClip _stepMusic;
         [SerializeField] private bool _hasWeapon = false;
         [SerializeField] private bool _isMenu = false;
 
         private Rigidbody _myRigidbody;
         private Animator _myAnimator;
         private BoxCollider _myBoxCollider;
+        private AudioSource _audioSource;
         private RaycastHit _raycastGroundHit;
         private Vector3 _movementVector;
         private Vector3 _lookVector;
@@ -56,6 +58,7 @@ namespace learn3d
             _myRigidbody = GetComponent<Rigidbody>();
             _myAnimator = GetComponent<Animator>();
             _myBoxCollider = GetComponent<BoxCollider>();
+            _audioSource = GetComponent<AudioSource>();
 
             _myAnimator.SetBool("hasWeapon", _hasWeapon);
         }
@@ -77,6 +80,7 @@ namespace learn3d
 
         void OnAnimatorMove()
         {
+
             var vector = _myRigidbody.position + _movementVector * _movementSpeedMultipie * Time.deltaTime;
             vector.y = _myRigidbody.position.y;
             _myRigidbody.MovePosition(vector);
@@ -109,6 +113,20 @@ namespace learn3d
             {
                 _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
                 var vector = transform.TransformDirection(_movementVector);
+
+                if (vector.x != 0.0f || vector.z != 0.0f)
+                {
+                    if (!_audioSource.isPlaying)
+                    {
+                        _audioSource.clip = _stepMusic;
+                        _audioSource.Play();
+
+                    }
+                }
+                else
+                {
+                    _audioSource.Stop();
+                }
 
                 _myAnimator.SetFloat("Forward", vector.x);
                 _myAnimator.SetFloat("Turn", vector.z);
