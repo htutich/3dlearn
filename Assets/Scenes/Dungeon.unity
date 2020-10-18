@@ -4052,7 +4052,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3514c5532c39fb45866a619c1502bb7, type: 2}
+  - {fileID: 2100000, guid: 043aa92fa31bf7c4f8f5ce1328006f71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4494,21 +4494,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 974006056825610864}
     m_Modifications:
-    - target: {fileID: 1450727654152465187, guid: bb3a6ef06f6199d48a7d4df5fc0d5a07,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450727654152465187, guid: bb3a6ef06f6199d48a7d4df5fc0d5a07,
-        type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450727654152465187, guid: bb3a6ef06f6199d48a7d4df5fc0d5a07,
-        type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2682174220460285896, guid: bb3a6ef06f6199d48a7d4df5fc0d5a07,
         type: 3}
       propertyPath: m_Name

@@ -27,6 +27,15 @@ public class AudioMenager : MonoBehaviour
 
     #region UnityMethods
 
+    private void Awake()
+    {
+        var audiosMenagers = FindObjectsOfType<AudioMenager>();
+        if (audiosMenagers.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         if (PlayerPrefs.HasKey("MasterMusicVolume"))
@@ -88,6 +97,8 @@ public class AudioMenager : MonoBehaviour
 
     private void StartRandomMusic()
     {
+        _audioSource.Stop();
+
         if (_isMenu)
         {
             int randomValue = Random.Range(0, _menuMusic.Length);

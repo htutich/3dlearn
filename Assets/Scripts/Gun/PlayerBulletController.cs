@@ -37,8 +37,10 @@ namespace learn3d
                 var doorHealthManager = enemy.gameObject.GetComponent<DoorHealthManager>();
                 doorHealthManager?.HurtEnemy(_damageToGive);
             }
-
-            Destroy(gameObject);
+            if (!enemy.gameObject.CompareTag("Player"))
+            {
+                Destroy(gameObject);
+            }
         }
 
         #endregion

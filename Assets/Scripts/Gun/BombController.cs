@@ -8,8 +8,6 @@ namespace learn3d
 
         [SerializeField] private GameObject _bombModel;
         [SerializeField] private GameObject _explosionBomb;
-        private ParticleSystem _explosionParticle;
-        private AudioSource _audioSource;
         private Rigidbody _myRigidbody;
 
         private float _forceExplosion = 10.0f;
@@ -29,9 +27,6 @@ namespace learn3d
 
         private void Start()
         {
-            _audioSource = GetComponent<AudioSource>();
-            _explosionParticle = _explosionBomb.GetComponent<ParticleSystem>();
-
             _myRigidbody = GetComponent<Rigidbody>();
             _myRigidbody.AddForce(transform.forward * 10.0f, ForceMode.Impulse);
 
@@ -41,7 +36,7 @@ namespace learn3d
 
         private void Update()
         {
-            if (_isDetonate && !_explosionParticle.IsAlive())
+            if (_isDetonate)
             {
                 Destroy(gameObject);
             }
@@ -63,10 +58,8 @@ namespace learn3d
         private void Detonate()
         {
             _isDetonate = true;
+            Instantiate(_explosionBomb, _bombModel.transform.position, _bombModel.transform.rotation);
             Destroy(_bombModel);
-
-            _audioSource.Play();
-            _explosionParticle.Play();
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, _radiusExplosion);
 
