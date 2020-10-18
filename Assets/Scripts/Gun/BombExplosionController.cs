@@ -1,30 +1,33 @@
 ﻿using UnityEngine;
 
 
-public class BombExplosionController : MonoBehaviour
+namespace learn3d
 {
-    #region Fields
-    
-    private ParticleSystem _explosionParticle;
-
-    #endregion
-
-
-    #region UnityMethods
-
-    private void Start()
+    public class BombExplosionController : MonoBehaviour
     {
-        _explosionParticle = GetComponent<ParticleSystem>();
-        _explosionParticle.Play();
-    }
+        #region Fields
 
-    private void Update()
-    {
-        if (!_explosionParticle.IsAlive())
+        private ParticleSystem _explosionParticle;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void Start()
         {
-            Destroy(gameObject);
+            _explosionParticle = GetComponent<ParticleSystem>();
+            _explosionParticle.Play();
         }
-    }
 
-    #endregion
+        private void Update()
+        {
+            if (!_explosionParticle.IsAlive())
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+    }
 }
