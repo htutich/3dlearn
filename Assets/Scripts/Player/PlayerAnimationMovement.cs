@@ -77,7 +77,9 @@ namespace learn3d
 
         void OnAnimatorMove()
         {
-            _myRigidbody.MovePosition(_myRigidbody.position + _movementVector * _movementSpeedMultipie * Time.deltaTime);
+            var vector = _myRigidbody.position + _movementVector * _movementSpeedMultipie * Time.deltaTime;
+            vector.y = _myRigidbody.position.y;
+            _myRigidbody.MovePosition(vector);
         }
 
         #endregion
@@ -109,7 +111,7 @@ namespace learn3d
                 var vector = transform.TransformDirection(_movementVector);
 
                 _myAnimator.SetFloat("Forward", vector.x);
-                _myAnimator.SetFloat("Turn", vector.z * -1.0f);
+                _myAnimator.SetFloat("Turn", vector.z);
             }
         }
 
@@ -145,7 +147,10 @@ namespace learn3d
                     {
                         _myAnimator.Play("Running Jump");
                     }
-                    _myRigidbody.AddForce(new Vector3(0, _heightJump, 0), ForceMode.Impulse);
+
+                    var vector = _myRigidbody.position + _movementVector * _movementSpeedMultipie * Time.deltaTime;
+                    vector.y = _myRigidbody.position.y + _heightJump * _movementSpeedMultipie * Time.deltaTime;
+                    _myRigidbody.MovePosition(vector);
                 }
             }
         }

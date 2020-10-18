@@ -6,14 +6,21 @@ namespace learn3d
     {
         #region Fields
 
+        [SerializeField] private GameObject _bombModel;
+        [SerializeField] private GameObject _explosionBomb;
+        private ParticleSystem _explosionParticle;
         private AudioSource _audioSource;
         private Rigidbody _myRigidbody;
+
         private float _forceExplosion = 10.0f;
         private float _radiusExplosion = 5.0f;
         private float _timeToDetonate = 5.0f;
+
         private int _minDamage = 40;
         private int _maxDamage = 80;
         private int _damage;
+
+        private bool _isDetonate = false;
 
         #endregion
 
@@ -23,6 +30,7 @@ namespace learn3d
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();
+            _explosionParticle = _explosionBomb.GetComponent<ParticleSystem>();
 
             _myRigidbody = GetComponent<Rigidbody>();
             _myRigidbody.AddForce(transform.forward * 10.0f, ForceMode.Impulse);
@@ -31,9 +39,17 @@ namespace learn3d
             Invoke(nameof(Detonate), _timeToDetonate);
         }
 
+        private void Update()
+        {
+            if (_isDetonate && !_explosionParticle.IsAlive())
+            {
+                Destroy(gameObject);
+            }
+        }
+
         private void OnTriggerEnter(Collider enemy)
         {
-            if (enemy.gameObject.CompareTag("Enemy"))
+            if (enemy.gameObject.CompareTag("Enemy") && !_isDetonate)
             {
                 Detonate();
             }
@@ -46,7 +62,11 @@ namespace learn3d
 
         private void Detonate()
         {
+            _isDetonate = true;
+            Destroy(_bombModel);
+
             _audioSource.Play();
+            _explosionParticle.Play();
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, _radiusExplosion);
 
@@ -72,7 +92,7 @@ namespace learn3d
                     }
                 }
             }
-            Destroy(gameObject);
+            
         }
 
         #endregion

@@ -41,7 +41,6 @@ namespace learn3d
                     var lookAtPlayer = _player.transform.position;
                     lookAtPlayer.y += 0.5f;
                     transform.LookAt(lookAtPlayer);
-                    Debug.DrawLine(transform.position, _player.transform.position, Color.blue);
 
                     var startRaycastPosition = transform.position;
                     var playerPosition = _player.transform.position - startRaycastPosition;
